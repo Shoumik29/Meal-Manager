@@ -1,16 +1,21 @@
 package com.example.mealmanager;
 
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import androidx.appcompat.widget.Toolbar;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
 
     public CardView profileCv, statisticsCv, account_settingsCv, data_entryCv, paymentCv, searchCv;
+    private DrawerLayout drawerLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +28,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         data_entryCv = (CardView) findViewById(R.id.cv3);
         paymentCv = (CardView) findViewById(R.id.cv5);
         searchCv = (CardView) findViewById(R.id.cv6);
+        drawerLayout = (DrawerLayout) findViewById(R.id.nav_view);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+
+
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.navigation_draw_open, R.string.navigation_draw_close);
+        drawerLayout.addDrawerListener(toggle);
+        toggle.syncState();
 
         profileCv.setOnClickListener(this);
         statisticsCv.setOnClickListener(this);
@@ -30,6 +42,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         data_entryCv.setOnClickListener(this);
         paymentCv.setOnClickListener(this);
         searchCv.setOnClickListener(this);
+    }
+
+    @Override
+    public void onBackPressed() {
+        if(drawerLayout.isDrawerOpen(GravityCompat.START)){
+            drawerLayout.closeDrawer(GravityCompat.START);
+        }
+        else{
+            super.onBackPressed();
+        }
     }
 
     @Override

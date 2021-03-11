@@ -9,12 +9,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MealManager">
-        <activity android:name=".data_entry"></activity>
+        <activity android:name=".statistics"></activity>
+        <activity android:name=".profile" />
+        <activity android:name=".data_entry" />
         <activity android:name=".payment" />
         <activity android:name=".search" />
-        <activity android:name=".statistics" />
         <activity android:name=".account_settings" />
-        <activity android:name=".profile" />
         <activity android:name=".log_in_activity" />
         <activity android:name=".MainActivity">
             <intent-filter>
