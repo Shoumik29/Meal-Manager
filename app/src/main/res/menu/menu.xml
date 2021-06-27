@@ -4,15 +4,15 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/item1"
-            android:title="Home"></item>
+            android:title="@string/home" />
 
         <item
             android:id="@+id/item2"
-            android:title="Profile"></item>
+            android:title="@string/profile" />
 
         <item
             android:id="@+id/item3"
-            android:title="Log out"></item>
+            android:title="@string/log_out" />
 
     </group>
 
