@@ -126,7 +126,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         switch (item.getItemId()) {
             case R.id.item1:
-                Toast.makeText(MainActivity.this, "Authintication Successfull", Toast.LENGTH_LONG).show();
+                Toast.makeText(MainActivity.this, "Authentication Successful", Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(MainActivity.this, statistics.class);
                 startActivity(intent);
                 break;
