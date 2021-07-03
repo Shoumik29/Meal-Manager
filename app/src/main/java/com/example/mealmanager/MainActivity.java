@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         profileCv = (CardView) findViewById(R.id.cv2);
         account_settingsCv = (CardView) findViewById(R.id.cv1);
         paymentCv = (CardView) findViewById(R.id.cv5);
-        searchCv = (CardView) findViewById(R.id.cv6);
+        //searchCv = (CardView) findViewById(R.id.cv6);
         drawerLayout = (DrawerLayout) findViewById(R.id.nav_view);
         toolbar = (Toolbar)findViewById(R.id.toolbar);
         navigationView = (NavigationView)findViewById(R.id.navigation_view);
@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         profileCv.setOnClickListener(this);
         account_settingsCv.setOnClickListener(this);
         paymentCv.setOnClickListener(this);
-        searchCv.setOnClickListener(this);
+        //searchCv.setOnClickListener(this);
 
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.setCheckedItem(R.id.item1);
@@ -108,12 +108,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 i = new Intent(this,account_settings.class);
                 startActivity(i);
                 break;
-            case R.id.cv6 :
-                i = new Intent(this,search.class);
-                startActivity(i);
-                break;
             case R.id.cv5 :
-                i = new Intent(this,payment.class);
+                i = new Intent(this,searchUsers.class);
                 startActivity(i);
                 break;
 
