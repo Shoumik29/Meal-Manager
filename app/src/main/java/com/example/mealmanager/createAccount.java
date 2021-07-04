@@ -92,11 +92,11 @@ public class createAccount extends AppCompatActivity {
         String name = ETname.getText().toString().trim();
         String doc = ETemail.getText().toString().trim();
 
-        // Create a new user with a first and last name
         Map<String, Object> user = new HashMap<>();
         user.put("Name", name);
         user.put("Mobile Number", mobileNumber);
         user.put("Institution", institution);
+        user.put("Meal name", null);
 
         // Add a new document with a generated ID
         db.collection("users").document(CurrentUserID)

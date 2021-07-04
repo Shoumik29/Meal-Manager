@@ -26,7 +26,7 @@ import com.google.firebase.auth.FirebaseUser;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, NavigationView.OnNavigationItemSelectedListener {
 
 
-    public CardView profileCv, account_settingsCv, paymentCv, searchCv;
+    public CardView profileCv, account_settingsCv, paymentCv, myMealCv;
     private DrawerLayout drawerLayout;
     private FirebaseAuth mAuth;
     public FirebaseUser currentUser;
@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //Tools id section
         profileCv = (CardView) findViewById(R.id.cv2);
         account_settingsCv = (CardView) findViewById(R.id.cv1);
-        paymentCv = (CardView) findViewById(R.id.cv5);
+        myMealCv = (CardView) findViewById(R.id.cv6);
         //searchCv = (CardView) findViewById(R.id.cv6);
         drawerLayout = (DrawerLayout) findViewById(R.id.nav_view);
         toolbar = (Toolbar)findViewById(R.id.toolbar);
@@ -57,7 +57,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         profileCv.setOnClickListener(this);
         account_settingsCv.setOnClickListener(this);
-        paymentCv.setOnClickListener(this);
+        myMealCv.setOnClickListener(this);
+
         //searchCv.setOnClickListener(this);
 
         navigationView.setNavigationItemSelectedListener(this);
@@ -108,11 +109,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 i = new Intent(this,account_settings.class);
                 startActivity(i);
                 break;
-            case R.id.cv5 :
-                i = new Intent(this,searchUsers.class);
+            case R.id.cv6 :
+                i = new Intent(this,startMeal.class);
                 startActivity(i);
                 break;
-
         }
     }
 
@@ -120,14 +120,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
+        Intent i1;
+
         switch (item.getItemId()) {
             case R.id.item1:
                 Toast.makeText(MainActivity.this, "Authentication Successful", Toast.LENGTH_LONG).show();
-                Intent intent = new Intent(MainActivity.this, statistics.class);
-                startActivity(intent);
+                i1 = new Intent(MainActivity.this, statistics.class);
+                startActivity(i1);
                 break;
             case R.id.item3:
                 logout();
+                break;
+            case R.id.item4:
+                Toast.makeText(MainActivity.this, "Successful", Toast.LENGTH_LONG).show();
+                i1 = new Intent(MainActivity.this, searchUsers.class);
+                startActivity(i1);
                 break;
         }
         drawerLayout.closeDrawer(GravityCompat.START);
