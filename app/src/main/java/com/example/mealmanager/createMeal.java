@@ -52,11 +52,11 @@ public class createMeal extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 storingMealData();
+                Intent i = new Intent(createMeal.this, MainActivity.class);
+                startActivity(i);
             }
         });
-
     }
-
 
     private void storingMealData() {
 

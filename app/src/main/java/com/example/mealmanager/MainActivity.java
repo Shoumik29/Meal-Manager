@@ -1,6 +1,7 @@
 package com.example.mealmanager;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.view.menu.MenuItemWrapperICS;
@@ -19,9 +20,17 @@ import android.widget.Toast;
 
 import androidx.appcompat.widget.Toolbar;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.squareup.okhttp.internal.DiskLruCache;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, NavigationView.OnNavigationItemSelectedListener {
 
@@ -32,6 +41,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public FirebaseUser currentUser;
     public Toolbar toolbar;
     public NavigationView navigationView;
+    public FirebaseFirestore db;
+    public boolean meal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +51,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         //Initialization
         mAuth = FirebaseAuth.getInstance();
+        db = FirebaseFirestore.getInstance();
 
         //Tools id section
         profileCv = (CardView) findViewById(R.id.cv2);
@@ -78,11 +90,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onStart();
         //Check if the user signed in
         currentUser = mAuth.getCurrentUser();
+
         if(currentUser == null){
             Intent intent = new Intent(MainActivity.this, log_in_activity.class);
             startActivity(intent);
             finish();
         }
+        else{
+            String userId = currentUser.getUid();
+            db.collection("users").document(userId).addSnapshotListener(new EventListener<DocumentSnapshot>() {
+                @Override
+                public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
+                    if(value.getString("Meal name") != null) meal = true;
+                    else meal = false;
+                }
+            });
+        }
+
     }
 
     @Override
@@ -110,7 +134,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(i);
                 break;
             case R.id.cv6 :
-                i = new Intent(this,startMeal.class);
+                if(meal){
+                    i = new Intent(this,myMeal.class);
+                }
+                else{
+                    i = new Intent(this,startMeal.class);
+                }
                 startActivity(i);
                 break;
         }

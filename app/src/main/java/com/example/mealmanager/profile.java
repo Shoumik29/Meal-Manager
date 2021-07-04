@@ -1,6 +1,7 @@
 package com.example.mealmanager;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
@@ -15,7 +16,9 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 
 public class profile extends AppCompatActivity {
 
@@ -50,21 +53,11 @@ public class profile extends AppCompatActivity {
         String userID = mAuth.getCurrentUser().getUid();
 
         DocumentReference docRef = db.collection("users").document(userID);
-        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+        docRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
             @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if (task.isSuccessful()) {
-                    DocumentSnapshot document = task.getResult();
-                    if (document.exists()) {
-                        userName.setText(document.getString("Name"));
-                        userInstitution.setText(document.getString("Institution"));
-                        Toast.makeText(profile.this, "Data retrieve Successful", Toast.LENGTH_LONG).show();
-                    } else {
-                        Toast.makeText(profile.this, "User not found", Toast.LENGTH_LONG).show();
-                    }
-                } else {
-                    Toast.makeText(profile.this, "Data retrieve failed", Toast.LENGTH_LONG).show();
-                }
+            public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
+                userName.setText(value.getString("Name"));
+                userInstitution.setText(value.getString("Institution"));
             }
         });
     }
