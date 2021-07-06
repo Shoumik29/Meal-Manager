@@ -53,11 +53,18 @@ public class profile extends AppCompatActivity {
         String userID = mAuth.getCurrentUser().getUid();
 
         DocumentReference docRef = db.collection("users").document(userID);
-        docRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
+        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
-            public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
-                userName.setText(value.getString("Name"));
-                userInstitution.setText(value.getString("Institution"));
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                DocumentSnapshot d = task.getResult();
+                userName.setText(d.getString("Name"));
+                userInstitution.setText(d.getString("Institution"));
+            }
+        })
+        .addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(profile.this, "Data fetch failed", Toast.LENGTH_SHORT).show();
             }
         });
     }

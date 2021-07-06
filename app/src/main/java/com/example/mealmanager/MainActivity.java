@@ -43,6 +43,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public NavigationView navigationView;
     public FirebaseFirestore db;
     public boolean meal;
+    public String meal_name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,8 +102,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             db.collection("users").document(userId).addSnapshotListener(new EventListener<DocumentSnapshot>() {
                 @Override
                 public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
-                    if(value.getString("Meal name") != null) meal = true;
-                    else meal = false;
+                    if(value.getString("Meal name") != null){
+                        meal = true;
+                        meal_name = value.getString("Meal name");
+                    }
+                    else {
+                        meal = false;
+                        meal_name = null;
+                    }
                 }
             });
         }
@@ -136,6 +143,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.cv6 :
                 if(meal){
                     i = new Intent(this,myMeal.class);
+                    i.putExtra("meal_name", meal_name);
                 }
                 else{
                     i = new Intent(this,startMeal.class);

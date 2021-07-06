@@ -44,7 +44,7 @@ public class searchUsers extends AppCompatActivity {
 
         userArrayList = new ArrayList<>();
         mDocs = FirebaseFirestore.getInstance();
-        mAdapter = new viewAdapter(userArrayList);
+        mAdapter = new viewAdapter(userArrayList, getApplicationContext());
 
         searchText = (EditText)findViewById(R.id.searchT);
         searchButton = (ImageButton) findViewById(R.id.searchB);
@@ -75,6 +75,7 @@ public class searchUsers extends AppCompatActivity {
                         userSearchModel obj = d.toObject(userSearchModel.class);
                         obj.setUserName(d.getString("Name"));
                         obj.setUserInstitution(d.getString("Institution"));
+                        obj.setUserId(d.getId());
                         userArrayList.add(obj);
                     }
                 }

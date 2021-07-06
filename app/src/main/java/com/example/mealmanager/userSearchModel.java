@@ -1,16 +1,17 @@
 package com.example.mealmanager;
 
 public class userSearchModel {
-    public String imageURL, userName, userInstitution;
+    public String imageURL, userName, userInstitution, userId;
 
     public userSearchModel(){
 
     }
 
-    public userSearchModel(String imageURL, String userName, String userInstitution) {
+    public userSearchModel(String imageURL, String userName, String userInstitution, String userId) {
         this.imageURL = imageURL;
         this.userName = userName;
         this.userInstitution = userInstitution;
+        this.userId = userId;
     }
 
     public String getImageURL() {
@@ -35,6 +36,13 @@ public class userSearchModel {
 
     public void setUserInstitution(String userInstitution) {
         this.userInstitution = userInstitution;
+    }
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
 
