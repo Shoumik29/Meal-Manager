@@ -62,7 +62,7 @@ public class viewAdapter extends RecyclerView.Adapter<viewAdapter.ViewHolder>{
         return dataList.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    public class ViewHolder extends RecyclerView.ViewHolder{
 
         public TextView userName, userInstitution;
         public ImageView profileImage;
@@ -76,10 +76,6 @@ public class viewAdapter extends RecyclerView.Adapter<viewAdapter.ViewHolder>{
             profileImage = itemView.findViewById(R.id.imageView9);
             ct = itemView.findViewById(R.id.touchLayout);
 
-        }
-
-        @Override
-        public void onClick(View v) {
         }
     }
 }

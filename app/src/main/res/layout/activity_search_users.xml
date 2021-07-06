@@ -7,7 +7,7 @@
     tools:context=".searchUsers">
 
     <EditText
-        android:id="@+id/searchT"
+        android:id="@+id/searchMT"
         android:layout_width="286dp"
         android:layout_height="62dp"
         android:background="@drawable/round"
@@ -23,7 +23,7 @@
         app:layout_constraintVertical_bias="0.068" />
 
     <ImageButton
-        android:id="@+id/searchB"
+        android:id="@+id/searchMB"
         android:layout_width="72dp"
         android:layout_height="56dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -35,7 +35,7 @@
         app:srcCompat="?android:attr/actionModeWebSearchDrawable" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/resultList"
+        android:id="@+id/resultMList"
         android:layout_width="410dp"
         android:layout_height="557dp"
         app:layout_constraintBottom_toBottomOf="parent"

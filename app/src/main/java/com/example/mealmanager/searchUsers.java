@@ -5,25 +5,18 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.Query;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.google.protobuf.StringValue;
 
-import java.security.PublicKey;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,10 +39,10 @@ public class searchUsers extends AppCompatActivity {
         mDocs = FirebaseFirestore.getInstance();
         mAdapter = new viewAdapter(userArrayList, getApplicationContext());
 
-        searchText = (EditText)findViewById(R.id.searchT);
-        searchButton = (ImageButton) findViewById(R.id.searchB);
+        searchText = (EditText)findViewById(R.id.searchMT);
+        searchButton = (ImageButton) findViewById(R.id.searchMB);
 
-        recyclerView = (RecyclerView)findViewById(R.id.resultList);
+        recyclerView = (RecyclerView)findViewById(R.id.resultMList);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(mAdapter);
 
