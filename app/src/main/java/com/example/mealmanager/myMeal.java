@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -25,9 +26,10 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 public class myMeal extends AppCompatActivity {
 
-    public Button leaveMeal, deleteMeal;
+    public Button leaveMeal, deleteMeal, joinMealRequest;
     public FirebaseFirestore db;
     public FirebaseAuth mAuth;
+    public TextView mealName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +41,8 @@ public class myMeal extends AppCompatActivity {
 
         leaveMeal = (Button)findViewById(R.id.button9);
         deleteMeal = (Button)findViewById(R.id.button10);
+        joinMealRequest = (Button)findViewById(R.id.button11);
+        mealName = (TextView)findViewById(R.id.textView25);
 
         leaveMeal.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,6 +73,7 @@ public class myMeal extends AppCompatActivity {
                     Intent i = new Intent(myMeal.this, MainActivity.class);
                     startActivity(i);
                 }
+                mealName.setText(value.getString("meal name"));
             }
         });
     }

@@ -35,6 +35,8 @@ public class mealAdapter extends RecyclerView.Adapter<mealAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull mealAdapter.ViewHolder holder, int position) {
 
+        final mealModel temp = dataList.get(position);
+
         holder.mealName.setText(dataList.get(position).getMealName());
         holder.managerName.setText(dataList.get(position).getManagerName());
 
@@ -42,6 +44,7 @@ public class mealAdapter extends RecyclerView.Adapter<mealAdapter.ViewHolder> {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(context, mealViewForOthers.class);
+                i.putExtra("mealName", temp.getMealName());
                 i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(i);
             }
