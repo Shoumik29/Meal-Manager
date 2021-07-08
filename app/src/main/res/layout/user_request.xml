@@ -11,14 +11,14 @@
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/touchLayout"
+        android:id="@+id/reqTouchLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="16dp">
 
 
         <ImageView
-            android:id="@+id/imageView9"
+            android:id="@+id/reqImage"
             android:layout_width="129dp"
             android:layout_height="123dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -30,7 +30,7 @@
             app:srcCompat="@drawable/profile_pic" />
 
         <TextView
-            android:id="@+id/textView6"
+            android:id="@+id/reqName"
             android:layout_width="199dp"
             android:layout_height="47dp"
             android:text="     User Name"
@@ -42,13 +42,14 @@
             app:layout_constraintVertical_bias="0.0" />
 
         <TextView
-            android:id="@+id/textView24"
+            android:id="@+id/reqIns"
             android:layout_width="202dp"
             android:layout_height="23dp"
+            android:layout_marginBottom="52dp"
             android:text="    Institution"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.732"
+            app:layout_constraintHorizontal_bias="0.717"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView6"
             app:layout_constraintVertical_bias="0.017" />
@@ -63,7 +64,7 @@
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView24"
-            app:layout_constraintVertical_bias="0.02" />
+            app:layout_constraintVertical_bias="1.0" />
 
         <Button
             android:id="@+id/button14"
@@ -75,7 +76,7 @@
             app:layout_constraintHorizontal_bias="0.948"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView24"
-            app:layout_constraintVertical_bias="0.019" />
+            app:layout_constraintVertical_bias="1.0" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

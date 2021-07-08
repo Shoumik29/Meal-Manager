@@ -56,6 +56,14 @@ public class myMeal extends AppCompatActivity {
                 deleteMeal();
             }
         });
+        joinMealRequest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(myMeal.this, mealRequestList.class);
+                i.putExtra("mealName", mealName.getText());
+                startActivity(i);
+            }
+        });
 
     }
 
@@ -66,8 +74,8 @@ public class myMeal extends AppCompatActivity {
             @Override
             public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
                 if(value.exists()){
-                    if(!value.getString("manager ID").equals(mAuth.getCurrentUser().getUid())) deleteMeal.setVisibility(View.INVISIBLE);
-                    else deleteMeal.setVisibility(View.VISIBLE);
+                    if(!value.getString("manager ID").equals(mAuth.getCurrentUser().getUid())) {deleteMeal.setVisibility(View.INVISIBLE); joinMealRequest.setVisibility(View.INVISIBLE);}
+                    else {deleteMeal.setVisibility(View.VISIBLE); joinMealRequest.setVisibility(View.VISIBLE);}
                 }
                 else{
                     Intent i = new Intent(myMeal.this, MainActivity.class);
@@ -117,6 +125,7 @@ public class myMeal extends AppCompatActivity {
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
+                        db.collection("meals").document(getIntent().getStringExtra("meal_name")).collection("Borders").document(userID).delete();
                         Toast.makeText(myMeal.this,"Successful",Toast.LENGTH_SHORT).show();
                         finish();
                     }
