@@ -8,15 +8,15 @@
 
     <Button
         android:id="@+id/button9"
-        android:layout_width="158dp"
-        android:layout_height="83dp"
+        android:layout_width="142dp"
+        android:layout_height="62dp"
         android:text="Leave Meal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.49"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.845" />
+        app:layout_constraintVertical_bias="0.895" />
 
     <TextView
         android:id="@+id/textView25"
@@ -33,24 +33,35 @@
 
     <Button
         android:id="@+id/button10"
-        android:layout_width="168dp"
-        android:layout_height="85dp"
+        android:layout_width="152dp"
+        android:layout_height="60dp"
         android:text="Delete Meal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.518"
+        app:layout_constraintHorizontal_bias="0.509"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.642" />
+        app:layout_constraintVertical_bias="0.763" />
 
     <Button
         android:id="@+id/button11"
-        android:layout_width="153dp"
-        android:layout_height="81dp"
+        android:layout_width="149dp"
+        android:layout_height="65dp"
         android:text="join requests"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.43" />
+        app:layout_constraintVertical_bias="0.623" />
+
+    <Button
+        android:id="@+id/button15"
+        android:layout_width="150dp"
+        android:layout_height="65dp"
+        android:text="Border List"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.476" />
 </androidx.constraintlayout.widget.ConstraintLayout>

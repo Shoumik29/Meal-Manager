@@ -81,6 +81,8 @@ public class requestAdapter extends RecyclerView.Adapter<requestAdapter.ViewHold
                     confirmRequest();
                     confirmB.setEnabled(false);
                     confirmB.setBackgroundColor(Color.GRAY);
+                    declineB.setEnabled(false);
+                    declineB.setBackgroundColor(Color.GRAY);
                 }
             });
 
