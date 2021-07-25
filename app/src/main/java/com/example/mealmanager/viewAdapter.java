@@ -2,7 +2,6 @@ package com.example.mealmanager;
 
 import android.content.Context;
 import android.content.Intent;
-import android.provider.ContactsContract;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,15 +10,9 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.Query;
-
-import java.security.cert.PKIXRevocationChecker;
 import java.util.ArrayList;
-import java.util.List;
 
 public class viewAdapter extends RecyclerView.Adapter<viewAdapter.ViewHolder>{
 
@@ -71,10 +64,10 @@ public class viewAdapter extends RecyclerView.Adapter<viewAdapter.ViewHolder>{
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            userName = itemView.findViewById(R.id.textView6);
-            userInstitution = itemView.findViewById(R.id.textView24);
-            profileImage = itemView.findViewById(R.id.imageView9);
-            ct = itemView.findViewById(R.id.touchLayout);
+            userName = itemView.findViewById(R.id.BLName);
+            userInstitution = itemView.findViewById(R.id.BLInstitution);
+            profileImage = itemView.findViewById(R.id.BLmealimage);
+            ct = itemView.findViewById(R.id.BLconstrain);
 
         }
     }

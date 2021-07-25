@@ -5,13 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="#FFFFFF"
-    app:cardCornerRadius="5dp"
     android:elevation="4dp"
+    app:cardCornerRadius="5dp"
     app:cardUseCompatPadding="true">
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/BLconstrain"
+        android:id="@+id/BLMconstrain"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#FFFFFF"
@@ -19,40 +19,53 @@
 
 
         <ImageView
-            android:id="@+id/BLmealimage"
-            android:layout_width="129dp"
-            android:layout_height="123dp"
+            android:id="@+id/BLMmealimage"
+            android:layout_width="117dp"
+            android:layout_height="112dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.75"
+            app:layout_constraintVertical_bias="0.0"
             app:srcCompat="@drawable/profile_pic" />
 
         <TextView
-            android:id="@+id/BLName"
-            android:layout_width="199dp"
-            android:layout_height="47dp"
+            android:id="@+id/BLMName"
+            android:layout_width="248dp"
+            android:layout_height="48dp"
             android:text="     User Name"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.778"
+            app:layout_constraintHorizontal_bias="0.901"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.114" />
+            app:layout_constraintVertical_bias="0.024" />
 
         <TextView
-            android:id="@+id/BLInstitution"
-            android:layout_width="213dp"
-            android:layout_height="64dp"
+            android:id="@+id/BLMInstitution"
+            android:layout_width="257dp"
+            android:layout_height="33dp"
             android:text="    Institution"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.8"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.811" />
+            app:layout_constraintVertical_bias="0.496" />
+
+        <CheckBox
+            android:id="@+id/checkBox"
+            android:layout_width="103dp"
+            android:layout_height="47dp"
+            android:text="Selected"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.948"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/BLMInstitution"
+            app:layout_constraintVertical_bias="0.684" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </androidx.cardview.widget.CardView>

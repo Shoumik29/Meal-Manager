@@ -36,12 +36,16 @@ public class BorderList extends AppCompatActivity {
         recyclerView = (RecyclerView)findViewById(R.id.borderList);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(mAdapter);
+
+        retrieveBorders();
     }
 
     @Override
     protected void onStart() {
         super.onStart();
+    }
 
+    public void retrieveBorders(){
         mDocs.collection("meals").document(getIntent().getStringExtra("mealName")).collection("Borders").get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override

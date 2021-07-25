@@ -26,7 +26,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 public class myMeal extends AppCompatActivity {
 
-    public Button leaveMeal, deleteMeal, joinMealRequest, borderList;
+    public Button leaveMeal, deleteMeal, joinMealRequest, borderList, createAMeal;
     public FirebaseFirestore db;
     public FirebaseAuth mAuth;
     public TextView mealName;
@@ -44,6 +44,7 @@ public class myMeal extends AppCompatActivity {
         joinMealRequest = (Button)findViewById(R.id.button11);
         mealName = (TextView)findViewById(R.id.textView25);
         borderList = (Button)findViewById(R.id.button15);
+        createAMeal = (Button)findViewById(R.id.button16);
 
         leaveMeal.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,6 +70,15 @@ public class myMeal extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i =  new Intent(myMeal.this, BorderList.class);
+                i.putExtra("mealName", getIntent().getStringExtra("meal_name"));
+                i.putExtra("myMeal", true);
+                startActivity(i);
+            }
+        });
+        createAMeal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(myMeal.this, todayMeal.class);
                 i.putExtra("mealName", getIntent().getStringExtra("meal_name"));
                 startActivity(i);
             }

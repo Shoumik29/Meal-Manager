@@ -9,7 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MealManager">
-        <activity android:name=".BorderList"></activity>
+        <activity android:name=".borderListForMeal"></activity>
+        <activity android:name=".todayMeal" />
+        <activity android:name=".BorderList" />
         <activity android:name=".mealRequestList" />
         <activity android:name=".mealViewForOthers" />
         <activity android:name=".profileViewForOthers" />

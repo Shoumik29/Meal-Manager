@@ -64,10 +64,10 @@ public class borderAdapter extends RecyclerView.Adapter<borderAdapter.ViewHolder
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            userName = itemView.findViewById(R.id.textView6);
-            userInstitution = itemView.findViewById(R.id.textView24);
-            profileImage = itemView.findViewById(R.id.imageView9);
-            ct = itemView.findViewById(R.id.touchLayout);
+            userName = itemView.findViewById(R.id.BLName);
+            userInstitution = itemView.findViewById(R.id.BLInstitution);
+            profileImage = itemView.findViewById(R.id.BLmealimage);
+            ct = itemView.findViewById(R.id.BLconstrain);
 
         }
     }
