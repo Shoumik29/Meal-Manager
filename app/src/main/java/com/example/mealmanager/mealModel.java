@@ -1,15 +1,17 @@
 package com.example.mealmanager;
 
 public class mealModel {
-    String mealName, managerName;
+    String mealName, managerName, date;
 
     public mealModel(){
 
     }
 
-    public mealModel(String mealName, String managerName) {
+
+    public mealModel(String mealName, String managerName, String date) {
         this.mealName = mealName;
         this.managerName = managerName;
+        this.date = date;
     }
 
     public String getMealName() {
@@ -26,5 +28,13 @@ public class mealModel {
 
     public void setManagerName(String managerName) {
         this.managerName = managerName;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 }

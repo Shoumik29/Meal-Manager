@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -14,60 +13,57 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class mealAdapter extends RecyclerView.Adapter<mealAdapter.ViewHolder> {
+public class mealHistoryAdapter extends RecyclerView.Adapter<mealHistoryAdapter.ViewHolder> {
 
     ArrayList<mealModel> dataList;
     Context context;
 
-    public mealAdapter(ArrayList<mealModel> dataList, Context context){
-        this.context = context;
+    public mealHistoryAdapter(ArrayList<mealModel> dataList, Context context){
         this.dataList = dataList;
+        this.context = context;
     }
 
     @NonNull
     @Override
-    public mealAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.meal_list, parent, false);
-        return new ViewHolder(view);
+    public mealHistoryAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.meal_history, parent, false);
+        return new mealHistoryAdapter.ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull mealAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull mealHistoryAdapter.ViewHolder holder, int position) {
 
         final mealModel temp = dataList.get(position);
 
-        holder.mealName.setText(dataList.get(position).getMealName());
-        holder.managerName.setText(dataList.get(position).getManagerName());
+        holder.mealName.setText(String.format("Meal %s",dataList.get(position).getDate()));
 
         holder.ct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(context, mealViewForOthers.class);
-                i.putExtra("mealName", temp.getMealName());
+                Intent i = new Intent(context, mealHistoryView.class);
+                //i.putExtra("mealName", temp.getMealName());
                 i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(i);
             }
-         });
+        });
     }
 
     @Override
     public int getItemCount() {
         return dataList.size();
     }
+
     public class ViewHolder extends RecyclerView.ViewHolder{
 
         public TextView mealName, managerName;
-        public ImageView mealImage;
         public ConstraintLayout ct;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            mealName = itemView.findViewById(R.id.textView28);
-            managerName = itemView.findViewById(R.id.textView29);
-            mealImage = itemView.findViewById(R.id.imageView11);
-            ct = itemView.findViewById(R.id.touchLayout1);
-
+            mealName = itemView.findViewById(R.id.textView24);
+            managerName = itemView.findViewById(R.id.textView37);
+            ct = itemView.findViewById(R.id.CTmealHistory);
         }
     }
 }
