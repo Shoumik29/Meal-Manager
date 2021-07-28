@@ -104,8 +104,14 @@ public class myMeal extends AppCompatActivity {
             @Override
             public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
                 if(value.exists()){
-                    if(!value.getString("manager ID").equals(mAuth.getCurrentUser().getUid())) {deleteMeal.setVisibility(View.INVISIBLE); joinMealRequest.setVisibility(View.INVISIBLE);}
-                    else {deleteMeal.setVisibility(View.VISIBLE); joinMealRequest.setVisibility(View.VISIBLE);}
+                    if(!value.getString("manager ID").equals(mAuth.getCurrentUser().getUid())) {deleteMeal.setVisibility(View.INVISIBLE); joinMealRequest.setVisibility(View.INVISIBLE);
+                        createAMeal.setVisibility(View.INVISIBLE);
+                    }
+                    else {
+                        deleteMeal.setVisibility(View.VISIBLE);
+                        joinMealRequest.setVisibility(View.VISIBLE);
+                        createAMeal.setVisibility(View.VISIBLE);
+                    }
                 }
                 else{
                     Intent i = new Intent(myMeal.this, MainActivity.class);

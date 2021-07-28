@@ -4,7 +4,9 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -45,7 +47,15 @@ public class log_in_activity extends AppCompatActivity {
         logIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                logIn();
+                if(TextUtils.isEmpty(ETemail.getText().toString().trim()) || TextUtils.isEmpty(ETpassword.getText().toString().trim())){
+                    if(TextUtils.isEmpty(ETemail.getText().toString().trim())){
+                        ETemail.setError("Enter Your Email");
+                    }
+                    else if(TextUtils.isEmpty(ETpassword.getText().toString().trim())){
+                        ETpassword.setError("Enter Your Password");
+                    }
+                }
+                else logIn();
             }
         });
 

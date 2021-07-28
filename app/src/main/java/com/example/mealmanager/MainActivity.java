@@ -4,25 +4,19 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.view.menu.MenuItemWrapperICS;
-import androidx.cardview.widget.CardView;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.Task;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -30,12 +24,12 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
-import com.squareup.okhttp.internal.DiskLruCache;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, NavigationView.OnNavigationItemSelectedListener {
 
 
-    public CardView profileCv, account_settingsCv, paymentCv, myMealCv;
+   // public CardView profileCv, account_settingsCv, paymentCv, myMealCv;
+    public BottomNavigationView bottomNavigationView;
     private DrawerLayout drawerLayout;
     private FirebaseAuth mAuth;
     public FirebaseUser currentUser;
@@ -50,29 +44,54 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Bundle data =  new Bundle();
+        data.putString("mealName", meal_name);
+
+        Fragment home = new homeFragment();
+        home.setArguments(data);
+        getSupportFragmentManager().beginTransaction().replace(R.id.frameContainer, home).commit();
+
         //Initialization
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
 
-        //Tools id section
-        profileCv = (CardView) findViewById(R.id.cv2);
-        account_settingsCv = (CardView) findViewById(R.id.cv1);
-        myMealCv = (CardView) findViewById(R.id.cv6);
-        //searchCv = (CardView) findViewById(R.id.cv6);
+        bottomNavigationView = (BottomNavigationView)findViewById(R.id.bottomNavigationView);
         drawerLayout = (DrawerLayout) findViewById(R.id.nav_view);
         toolbar = (Toolbar)findViewById(R.id.toolbar);
         navigationView = (NavigationView)findViewById(R.id.navigation_view);
+        toolbar = (Toolbar)findViewById(R.id.toolbar);
+        toolbar.setTitle("Home");
+
+
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+                Fragment temp = null;
+
+                switch(item.getItemId()){
+                    case R.id.fragment_home: temp = new homeFragment();
+                    toolbar.setTitle("Home");
+                    break;
+                    case R.id.fragment_cash: temp = new cashInFragment();
+                    toolbar.setTitle("Cash In");
+                    break;
+                    case R.id.fragment_myMeal: temp = new myMealFragment();
+                    toolbar.setTitle("My Meal");
+                }
+                data.putString("mealName", meal_name);
+                temp.setArguments(data);
+                getSupportFragmentManager().beginTransaction().replace(R.id.frameContainer, temp).commit();
+
+                return true;
+            }
+        });
 
         //Navigation bar section
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.navigation_draw_open, R.string.navigation_draw_close);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
 
-        profileCv.setOnClickListener(this);
-        account_settingsCv.setOnClickListener(this);
-        myMealCv.setOnClickListener(this);
-
-        //searchCv.setOnClickListener(this);
 
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.setCheckedItem(R.id.item1);
@@ -113,7 +132,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
             });
         }
-
     }
 
     @Override
@@ -125,34 +143,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             super.onBackPressed();
         }
     }
-
-    @Override
-    public void onClick(View v) {
-
-        Intent i;
-
-        switch (v.getId()){
-            case R.id.cv2 :
-                i = new Intent(this,profile.class);
-                startActivity(i);
-                break;
-            case R.id.cv1 :
-                i = new Intent(this,account_settings.class);
-                startActivity(i);
-                break;
-            case R.id.cv6 :
-                if(meal){
-                    i = new Intent(this,myMeal.class);
-                    i.putExtra("meal_name", meal_name);
-                }
-                else{
-                    i = new Intent(this,startMeal.class);
-                }
-                startActivity(i);
-                break;
-        }
-    }
-
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -176,5 +166,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    public void onClick(View v) {
+
     }
 }

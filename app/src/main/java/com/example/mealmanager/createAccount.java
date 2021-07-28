@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -25,7 +26,7 @@ import java.util.Map;
 
 public class createAccount extends AppCompatActivity {
 
-    public EditText ETname, ETemail, ETpass, ETinstitution, ETmobileNumber;
+    public EditText ETname, ETemail, ETpass, ETinstitution, ETmobileNumber, ETconfirmPass;
     public Button create;
     private FirebaseAuth mAuth;
     public FirebaseUser user;
@@ -47,12 +48,19 @@ public class createAccount extends AppCompatActivity {
         ETpass = (EditText)findViewById(R.id.editPass);
         ETinstitution = (EditText)findViewById(R.id.ETin);
         ETmobileNumber = (EditText)findViewById(R.id.editTextPhone);
+        ETconfirmPass = (EditText) findViewById(R.id.editConfirmPass);
         create = (Button)findViewById(R.id.button3);
 
         create.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                createUserAccount();
+                if(TextUtils.isEmpty(ETname.getText().toString().trim())) ETname.setError("Enter Your Name");
+                else if(TextUtils.isEmpty(ETinstitution.getText().toString().trim())) ETinstitution.setError("Enter Your Institution");
+                else if(TextUtils.isEmpty(ETmobileNumber.getText().toString().trim())) ETmobileNumber.setError("Enter Your Mobile Number");
+                else if(TextUtils.isEmpty(ETemail.getText().toString().trim())) ETemail.setError("Enter Your Email");
+                else if(TextUtils.isEmpty(ETpass.getText().toString().trim())) ETpass.setError("Enter Your Password");
+                else if(TextUtils.isEmpty(ETconfirmPass.getText().toString().trim())) ETconfirmPass.setError("Confirm Your Password");
+                else createUserAccount();
             }
         });
 
@@ -64,26 +72,28 @@ public class createAccount extends AppCompatActivity {
         String email = ETemail.getText().toString().trim();
         String password = ETpass.getText().toString().trim();
 
-        mAuth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if(task.isSuccessful()){
-                            user = mAuth.getCurrentUser();
-                            String userID = user.getUid();
-                            storingUsersData(userID);
+        if(!ETconfirmPass.getText().toString().trim().equals(ETpass.getText().toString().trim())) ETconfirmPass.setError("Password Doesn't Match");
+        else{
+            mAuth.createUserWithEmailAndPassword(email, password)
+                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if(task.isSuccessful()){
+                                user = mAuth.getCurrentUser();
+                                String userID = user.getUid();
+                                storingUsersData(userID);
 
-                            Toast.makeText(createAccount.this, "Authintication Successfull", Toast.LENGTH_LONG).show();
-                            Intent intent = new Intent(createAccount.this, MainActivity.class);
-                            startActivity(intent);
-                            finish();
+                                Toast.makeText(createAccount.this, "Authintication Successfull", Toast.LENGTH_LONG).show();
+                                Intent intent = new Intent(createAccount.this, MainActivity.class);
+                                startActivity(intent);
+                                finish();
+                            }
+                            else{
+                                Toast.makeText(createAccount.this, "Authintication failed", Toast.LENGTH_LONG).show();
+                            }
                         }
-                        else{
-                            Toast.makeText(createAccount.this, "Authintication failed", Toast.LENGTH_LONG).show();
-                        }
-                    }
-                });
-
+                    });
+        }
     }
     public void storingUsersData(String CurrentUserID){
 

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/fragment_home"
+        android:title="Home" />
+    <item
+        android:id="@+id/fragment_myMeal"
+        android:title="My Meal" />
+    <item
+        android:id="@+id/fragment_cash"
+        android:title="Cash In" />
+</menu>

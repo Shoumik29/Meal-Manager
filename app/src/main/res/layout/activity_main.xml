@@ -10,100 +10,38 @@
     android:id="@+id/nav_view">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/ConstrainLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cv6"
-            android:layout_width="162dp"
-            android:layout_height="154dp"
-            app:cardCornerRadius="5dp"
-            app:cardElevation="5dp"
+        <FrameLayout
+            android:id="@+id/frameContainer"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="@+id/bottomNavigationView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar"
+            app:layout_constraintVertical_bias="0.462">
+
+        </FrameLayout>
+
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottomNavigationView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/oneside_corner"
+            android:paddingBottom="10dp"
+            android:textAlignment="center"
+            app:backgroundTint="#2196F3"
+            app:itemTextColor="#FFFFFF"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.879"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.767">
+            app:menu="@menu/bottom_nav_menu">
 
-            <ImageView
-                android:id="@+id/imageView8"
-                android:layout_width="170dp"
-                android:layout_height="151dp"
-                app:srcCompat="@drawable/my_meal" />
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cv5"
-            android:layout_width="162dp"
-            android:layout_height="154dp"
-            app:cardCornerRadius="5dp"
-            app:cardElevation="5dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.124"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.767">
-
-            <ImageView
-                android:id="@+id/imageView6"
-                android:layout_width="163dp"
-                android:layout_height="155dp"
-                app:srcCompat="@drawable/payment" />
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cv1"
-            android:layout_width="162dp"
-            android:layout_height="154dp"
-            app:cardCornerRadius="5dp"
-            app:cardElevation="5dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.124"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.454">
-
-            <ImageView
-                android:id="@+id/imageView3"
-                android:layout_width="164dp"
-                android:layout_height="152dp"
-                app:srcCompat="@drawable/settings" />
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cv2"
-            android:layout_width="162dp"
-            android:layout_height="154dp"
-            app:cardCornerRadius="5dp"
-            app:cardElevation="5dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.879"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.454">
-
-            <ImageView
-                android:id="@+id/imageView2"
-                android:layout_width="170dp"
-                android:layout_height="151dp"
-                app:srcCompat="@drawable/profile" />
-        </androidx.cardview.widget.CardView>
-
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="137dp"
-            android:layout_height="108dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.532"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.081"
-            app:srcCompat="@drawable/logo" />
+        </com.google.android.material.bottomnavigation.BottomNavigationView>
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
@@ -111,13 +49,14 @@
             android:layout_height="48dp"
             android:background="@color/white"
             android:minHeight="?attr/actionBarSize"
+            android:paddingBottom="5.5dp"
             android:theme="?attr/actionBarTheme"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.004" />
+            app:layout_constraintVertical_bias="0.001" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -130,9 +69,6 @@
         app:headerLayout="@layout/nav_header"
         app:menu="@menu/menu"
         android:layout_gravity="start"/>
-
-
-
 
 
 </androidx.drawerlayout.widget.DrawerLayout>
