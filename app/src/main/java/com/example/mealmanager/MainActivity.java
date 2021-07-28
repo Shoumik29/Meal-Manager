@@ -7,10 +7,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.content.ClipData;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.widget.Toolbar;
@@ -38,16 +40,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public FirebaseFirestore db;
     public boolean meal;
     public String meal_name;
+    public Fragment home;
+    public Bundle data;
+    public TextView navHeaderName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Bundle data =  new Bundle();
+        data =  new Bundle();
         data.putString("mealName", meal_name);
 
-        Fragment home = new homeFragment();
+        home = new homeFragment();
         home.setArguments(data);
         getSupportFragmentManager().beginTransaction().replace(R.id.frameContainer, home).commit();
 
@@ -57,10 +62,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         bottomNavigationView = (BottomNavigationView)findViewById(R.id.bottomNavigationView);
         drawerLayout = (DrawerLayout) findViewById(R.id.nav_view);
-        toolbar = (Toolbar)findViewById(R.id.toolbar);
         navigationView = (NavigationView)findViewById(R.id.navigation_view);
         toolbar = (Toolbar)findViewById(R.id.toolbar);
         toolbar.setTitle("Home");
+
+        View headerView = navigationView.getHeaderView(0);
+        navHeaderName = (TextView) headerView.findViewById(R.id.textView22);
 
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -86,6 +93,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 return true;
             }
         });
+
 
         //Navigation bar section
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.navigation_draw_open, R.string.navigation_draw_close);
@@ -121,6 +129,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             db.collection("users").document(userId).addSnapshotListener(new EventListener<DocumentSnapshot>() {
                 @Override
                 public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
+
+                    navHeaderName.setText(value.getString("Name"));
+
                     if(value.getString("Meal name") != null){
                         meal = true;
                         meal_name = value.getString("Meal name");
@@ -150,9 +161,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Intent i1;
 
         switch (item.getItemId()) {
-            case R.id.item1:
+            case R.id.item2:
                 Toast.makeText(MainActivity.this, "Authentication Successful", Toast.LENGTH_LONG).show();
-                i1 = new Intent(MainActivity.this, statistics.class);
+                i1 = new Intent(MainActivity.this, profile.class);
                 startActivity(i1);
                 break;
             case R.id.item3:
@@ -160,7 +171,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.item4:
                 Toast.makeText(MainActivity.this, "Successful", Toast.LENGTH_LONG).show();
-                i1 = new Intent(MainActivity.this, searchUsers.class);
+                i1 = new Intent(MainActivity.this, searchMeal.class);
                 startActivity(i1);
                 break;
         }

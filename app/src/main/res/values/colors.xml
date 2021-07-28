@@ -6,6 +6,7 @@
     <color name="Material_200">#FFC107</color>
     <color name="Material_500">#FFC107</color>
     <color name="Material_700">#FFC107</color>
+    <color name="Material_400">#FFC107</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 </resources>

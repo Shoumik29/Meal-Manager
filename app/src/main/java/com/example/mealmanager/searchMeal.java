@@ -6,9 +6,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.os.ParcelUuid;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -23,7 +25,7 @@ import java.util.List;
 public class searchMeal extends AppCompatActivity {
 
     public EditText searchText;
-    public ImageButton searchButton;
+    public ImageView search, back;
     public RecyclerView recyclerView;
     public ArrayList<mealModel> mealArrayList;
     public FirebaseFirestore mDocs;
@@ -39,17 +41,25 @@ public class searchMeal extends AppCompatActivity {
         mAdapter = new mealAdapter(mealArrayList, getApplicationContext());
 
         searchText = (EditText)findViewById(R.id.searchMT);
-        searchButton = (ImageButton) findViewById(R.id.searchMB);
-
+        search = (ImageView)findViewById(R.id.imageView15);
+        back = (ImageView)findViewById(R.id.imageView16);
         recyclerView = (RecyclerView)findViewById(R.id.resultMList);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(mAdapter);
 
-        searchButton.setOnClickListener(new View.OnClickListener() {
+        search.setClickable(true);
+
+        search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mealArrayList.clear();
                 mealSearch();
+            }
+        });
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
             }
         });
     }

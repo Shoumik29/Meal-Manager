@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:elevation="4dp"
-    app:cardCornerRadius="5dp"
+    app:cardCornerRadius="20dp"
     app:cardUseCompatPadding="true">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -15,8 +15,8 @@
 
         <ImageView
             android:id="@+id/imageView11"
-            android:layout_width="166dp"
-            android:layout_height="wrap_content"
+            android:layout_width="144dp"
+            android:layout_height="127dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
