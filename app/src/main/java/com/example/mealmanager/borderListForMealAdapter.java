@@ -53,18 +53,21 @@ public class borderListForMealAdapter extends RecyclerView.Adapter<borderListFor
 
         holder.userName.setText(dataList.get(position).getUserName());
         holder.userInstitution.setText(dataList.get(position).getUserInstitution());
-        holder.selectB.setChecked(true);
+        holder.check.setVisibility(View.VISIBLE);
+        holder.uncheck.setVisibility(View.INVISIBLE);
         bordersForMeal.add(temp.getUserName());
 
         holder.cl.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(holder.selectB.isChecked()){
-                    holder.selectB.setChecked(false);
+                if(holder.check.isShown()){
+                    holder.check.setVisibility(View.INVISIBLE);
+                    holder.uncheck.setVisibility(View.VISIBLE);
                     bordersForMeal.remove(temp.getUserName());
                 }
                 else{
-                    holder.selectB.setChecked(true);
+                    holder.check.setVisibility(View.VISIBLE);
+                    holder.uncheck.setVisibility(View.INVISIBLE);
                     bordersForMeal.add(temp.getUserName());
                 }
             }
@@ -80,8 +83,7 @@ public class borderListForMealAdapter extends RecyclerView.Adapter<borderListFor
     public class ViewHolder extends RecyclerView.ViewHolder{
 
         public TextView userName, userInstitution;
-        public ImageView profileImage;
-        public CheckBox selectB;
+        public ImageView profileImage, check, uncheck;
         public ConstraintLayout cl;
 
         public ViewHolder(@NonNull View itemView) {
@@ -90,7 +92,8 @@ public class borderListForMealAdapter extends RecyclerView.Adapter<borderListFor
             userName = itemView.findViewById(R.id.BLMName);
             userInstitution = itemView.findViewById(R.id.BLMInstitution);
             profileImage = itemView.findViewById(R.id.BLMmealimage);
-            selectB = itemView.findViewById(R.id.checkBox);
+            check = itemView.findViewById(R.id.imageView17);
+            uncheck = itemView.findViewById(R.id.imageView19);
             cl = itemView.findViewById(R.id.BLMconstrain);
 
         }

@@ -44,27 +44,39 @@
 
         <TextView
             android:id="@+id/BLMInstitution"
-            android:layout_width="257dp"
-            android:layout_height="33dp"
+            android:layout_width="199dp"
+            android:layout_height="38dp"
             android:text="    Institution"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.648"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.679" />
+
+        <ImageView
+            android:id="@+id/imageView17"
+            android:layout_width="59dp"
+            android:layout_height="62dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.496" />
+            app:layout_constraintVertical_bias="1.0"
+            app:srcCompat="@drawable/confirm" />
 
-        <CheckBox
-            android:id="@+id/checkBox"
-            android:layout_width="103dp"
-            android:layout_height="47dp"
-            android:text="Selected"
+        <ImageView
+            android:id="@+id/imageView19"
+            android:layout_width="59dp"
+            android:layout_height="62dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.948"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/BLMInstitution"
-            app:layout_constraintVertical_bias="0.684" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0"
+            app:srcCompat="@drawable/asd" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

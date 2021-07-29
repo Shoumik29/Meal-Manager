@@ -50,6 +50,7 @@ public class todayMeal extends AppCompatActivity {
         selectBorder = (Button) findViewById(R.id.button18);
         confirmMeal = (Button) findViewById(R.id.button19);
 
+        dateText.setText("Today's Date : ");
         numberOfBorders.setText("Number of Borders : ");
 
         selectBorder.setOnClickListener(new View.OnClickListener() {
@@ -106,9 +107,8 @@ public class todayMeal extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        date = DateFormat.getDateInstance(DateFormat.DEFAULT).format(calendar.getTime());
-        dateText.setText(DateFormat.getDateInstance(DateFormat.DATE_FIELD).format(calendar.getTime()));
-        dateText.setTextColor(Color.GREEN);
 
+        date = DateFormat.getDateInstance(DateFormat.DEFAULT).format(calendar.getTime());
+        dateText.append(DateFormat.getDateInstance(DateFormat.DEFAULT).format(calendar.getTime()));
     }
 }

@@ -4,8 +4,8 @@
     <string name="navigation_draw_open">open navigation drawer</string>
 
     <string name="navigation_draw_close">close navigation drawer</string>
-    <string name="home">Home</string>
-    <string name="profile">Profile</string>
+    <string name="about_me">About Me</string>
+    <string name="faq">FAQ</string>
     <string name="log_out">Log out</string>
     <string name="Search" />
     <string name="search">Search</string>

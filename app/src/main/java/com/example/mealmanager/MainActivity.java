@@ -102,7 +102,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
         navigationView.setNavigationItemSelectedListener(this);
-        navigationView.setCheckedItem(R.id.item1);
+        navigationView.setCheckedItem(R.id.item4);
 
     }
 
@@ -161,11 +161,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Intent i1;
 
         switch (item.getItemId()) {
-            case R.id.item2:
-                Toast.makeText(MainActivity.this, "Authentication Successful", Toast.LENGTH_LONG).show();
-                i1 = new Intent(MainActivity.this, profile.class);
-                startActivity(i1);
-                break;
             case R.id.item3:
                 logout();
                 break;

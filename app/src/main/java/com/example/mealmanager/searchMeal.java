@@ -72,7 +72,8 @@ public class searchMeal extends AppCompatActivity {
                         List<DocumentSnapshot> list = queryDocumentSnapshots.getDocuments();
                         for(DocumentSnapshot d: list){
                             String data = d.getString("meal name");
-                            if(data.contains(searchText.getText().toString().trim())){
+                            if(searchText.getText().toString().trim().equals("")) Toast.makeText(searchMeal.this,"Insert Text To Search", Toast.LENGTH_SHORT).show();
+                            else if(data.toLowerCase().startsWith(searchText.getText().toString().trim().toLowerCase())){
                                 mealModel obj = d.toObject(mealModel.class);
                                 obj.setMealName(d.getString("meal name"));
                                 obj.setManagerName(d.getString("manager name"));

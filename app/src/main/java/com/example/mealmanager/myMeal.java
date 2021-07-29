@@ -39,88 +39,88 @@ public class myMeal extends AppCompatActivity {
         db = FirebaseFirestore.getInstance();
         mAuth = FirebaseAuth.getInstance();
 
-        mealHistory = (Button)findViewById(R.id.button17);
-        leaveMeal = (Button)findViewById(R.id.button9);
-        deleteMeal = (Button)findViewById(R.id.button10);
-        joinMealRequest = (Button)findViewById(R.id.button11);
-        mealName = (TextView)findViewById(R.id.textView25);
-        borderList = (Button)findViewById(R.id.button15);
-        createAMeal = (Button)findViewById(R.id.button16);
+//        mealHistory = (Button)findViewById(R.id.button17);
+//        leaveMeal = (Button)findViewById(R.id.button9);
+//        deleteMeal = (Button)findViewById(R.id.button10);
+//        joinMealRequest = (Button)findViewById(R.id.button11);
+//        mealName = (TextView)findViewById(R.id.textView25);
+//        borderList = (Button)findViewById(R.id.button15);
+//        createAMeal = (Button)findViewById(R.id.button16);
 
-        mealHistory.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(myMeal.this, mealHistory.class);
-                i.putExtra("mealName", getIntent().getStringExtra("meal_name"));
-                startActivity(i);
-            }
-        });
-
-        leaveMeal.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                leaveMeal();
-            }
-        });
-        deleteMeal.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                deleteMeal();
-            }
-        });
-        joinMealRequest.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(myMeal.this, mealRequestList.class);
-                i.putExtra("mealName", getIntent().getStringExtra("meal_name"));
-                startActivity(i);
-            }
-        });
-        borderList.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i =  new Intent(myMeal.this, BorderList.class);
-                i.putExtra("mealName", getIntent().getStringExtra("meal_name"));
-                i.putExtra("myMeal", true);
-                startActivity(i);
-            }
-        });
-        createAMeal.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(myMeal.this, todayMeal.class);
-                i.putExtra("mealName", getIntent().getStringExtra("meal_name"));
-                startActivity(i);
-            }
-        });
+//        mealHistory.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent i = new Intent(myMeal.this, mealHistory.class);
+//                i.putExtra("mealName", getIntent().getStringExtra("meal_name"));
+//                startActivity(i);
+//            }
+//        });
+//
+//        leaveMeal.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                leaveMeal();
+//            }
+//        });
+//        deleteMeal.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                deleteMeal();
+//            }
+//        });
+//        joinMealRequest.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent i = new Intent(myMeal.this, mealRequestList.class);
+//                i.putExtra("mealName", getIntent().getStringExtra("meal_name"));
+//                startActivity(i);
+//            }
+//        });
+//        borderList.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent i =  new Intent(myMeal.this, BorderList.class);
+//                i.putExtra("mealName", getIntent().getStringExtra("meal_name"));
+//                i.putExtra("myMeal", true);
+//                startActivity(i);
+//            }
+//        });
+//        createAMeal.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent i = new Intent(myMeal.this, todayMeal.class);
+//                i.putExtra("mealName", getIntent().getStringExtra("meal_name"));
+//                startActivity(i);
+//            }
+//        });
 
 
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        db.collection("meals").document(getIntent().getStringExtra("meal_name")).addSnapshotListener(new EventListener<DocumentSnapshot>() {
-            @Override
-            public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
-                if(value.exists()){
-                    if(!value.getString("manager ID").equals(mAuth.getCurrentUser().getUid())) {deleteMeal.setVisibility(View.INVISIBLE); joinMealRequest.setVisibility(View.INVISIBLE);
-                        createAMeal.setVisibility(View.INVISIBLE);
-                    }
-                    else {
-                        deleteMeal.setVisibility(View.VISIBLE);
-                        joinMealRequest.setVisibility(View.VISIBLE);
-                        createAMeal.setVisibility(View.VISIBLE);
-                    }
-                }
-                else{
-                    Intent i = new Intent(myMeal.this, MainActivity.class);
-                    startActivity(i);
-                }
-                mealName.setText(value.getString("meal name"));
-            }
-        });
-    }
+//    @Override
+//    protected void onStart() {
+//        super.onStart();
+//        db.collection("meals").document(getIntent().getStringExtra("meal_name")).addSnapshotListener(new EventListener<DocumentSnapshot>() {
+//            @Override
+//            public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
+//                if(value.exists()){
+//                    if(!value.getString("manager ID").equals(mAuth.getCurrentUser().getUid())) {deleteMeal.setVisibility(View.INVISIBLE); joinMealRequest.setVisibility(View.INVISIBLE);
+//                        createAMeal.setVisibility(View.INVISIBLE);
+//                    }
+//                    else {
+//                        deleteMeal.setVisibility(View.VISIBLE);
+//                        joinMealRequest.setVisibility(View.VISIBLE);
+//                        createAMeal.setVisibility(View.VISIBLE);
+//                    }
+//                }
+//                else{
+//                    Intent i = new Intent(myMeal.this, MainActivity.class);
+//                    startActivity(i);
+//                }
+//                mealName.setText(value.getString("meal name"));
+//            }
+//        });
+//    }
 
     private void deleteMeal() {
         db.collection("meals").document(getIntent().getStringExtra("meal_name")).collection("Borders").get()

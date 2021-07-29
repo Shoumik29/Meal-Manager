@@ -23,6 +23,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class myMealFragment extends Fragment {
@@ -54,7 +55,7 @@ public class myMealFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(mAdapter);
 
-        mealHistoryDataFetch();
+//        mealHistoryDataFetch();
 
 
         borderListCv.setOnClickListener(new View.OnClickListener() {
@@ -80,6 +81,7 @@ public class myMealFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(getActivity(), todayMeal.class);
+                i.putExtra("mealName", data.getString("mealName"));
                 startActivity(i);
             }
         });
@@ -87,7 +89,10 @@ public class myMealFragment extends Fragment {
         return view;
     }
 
+
+
     private void mealHistoryDataFetch() {
+        mealArrayList.clear();
         mDocs.collection("meals").document(data.getString("mealName")).collection("Meal History").get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
@@ -98,6 +103,7 @@ public class myMealFragment extends Fragment {
                             obj.setDate(d.getString("Date"));
                             mealArrayList.add(obj);
                         }
+                        Collections.reverse(mealArrayList);
                         mAdapter.notifyDataSetChanged();
                     }
                 })
@@ -112,6 +118,6 @@ public class myMealFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-
+        mealHistoryDataFetch();
     }
 }
