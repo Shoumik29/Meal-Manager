@@ -33,7 +33,7 @@ public class todayMeal extends AppCompatActivity {
     public Button selectBorder;
     public FirebaseFirestore docs;
     public String date;
-    public ArrayList<String> bordersForMeal;
+    public Map<String, String> bordersForMeal;
     public Button confirmMeal;
 
     @Override
@@ -43,7 +43,7 @@ public class todayMeal extends AppCompatActivity {
 
         calendar = Calendar.getInstance();
         docs = FirebaseFirestore.getInstance();
-        bordersForMeal = new ArrayList<>();
+        bordersForMeal = new HashMap<>();
 
         numberOfBorders = (TextView)findViewById(R.id.textView33);
         dateText = (TextView)findViewById(R.id.textView36);
@@ -52,6 +52,8 @@ public class todayMeal extends AppCompatActivity {
 
         dateText.setText("Today's Date : ");
         numberOfBorders.setText("Number of Borders : ");
+
+        dateText.append(DateFormat.getDateInstance(DateFormat.DEFAULT).format(calendar.getTime()));
 
         selectBorder.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -98,8 +100,11 @@ public class todayMeal extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 1) {
             if(resultCode == RESULT_OK) {
-                bordersForMeal = data.getStringArrayListExtra("Borders List");
-                numberOfBorders.setText("Number of Borders : "+String.valueOf(bordersForMeal.size()));
+                if(data.hasExtra("Borders List")){
+                    Bundle wrapper = data.getBundleExtra("Borders List");
+                    bordersForMeal = (Map<String, String>) wrapper.getSerializable("Borders List");
+                    numberOfBorders.setText("Number of Borders : "+String.valueOf(bordersForMeal.size()));
+                }
             }
         }
     }
@@ -109,6 +114,5 @@ public class todayMeal extends AppCompatActivity {
         super.onStart();
 
         date = DateFormat.getDateInstance(DateFormat.DEFAULT).format(calendar.getTime());
-        dateText.append(DateFormat.getDateInstance(DateFormat.DEFAULT).format(calendar.getTime()));
     }
 }

@@ -1,18 +1,27 @@
 package com.example.mealmanager;
 
 public class userSearchModel {
-    public String imageURL, userName, userInstitution, userId, mealName;
+    public String imageURL, userName, userInstitution, userId, mealName, userMobile;
 
     public userSearchModel(){
 
     }
 
-    public userSearchModel(String imageURL, String userName, String userInstitution, String userId, String mealName) {
+    public String getUserMobile() {
+        return userMobile;
+    }
+
+    public void setUserMobile(String userMobile) {
+        this.userMobile = userMobile;
+    }
+
+    public userSearchModel(String imageURL, String userName, String userInstitution, String userId, String mealName, String userMobile) {
         this.imageURL = imageURL;
         this.userName = userName;
         this.userInstitution = userInstitution;
         this.userId = userId;
         this.mealName = mealName;
+        this.userMobile = userMobile;
     }
 
     public String getMealName() {

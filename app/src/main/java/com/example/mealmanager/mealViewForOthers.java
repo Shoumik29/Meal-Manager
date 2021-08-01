@@ -29,7 +29,7 @@ public class mealViewForOthers extends AppCompatActivity {
     public Button joinButton;
     public FirebaseFirestore db;
     public FirebaseAuth mAuth;
-    public String userName, userInstitution;
+    public String userName, userInstitution, userMobile;
     public Boolean reqState;
 
     @Override
@@ -76,6 +76,7 @@ public class mealViewForOthers extends AppCompatActivity {
         Map<String, Object> req = new HashMap<>();
         req.put("user name", userName);
         req.put("user institution", userInstitution);
+        req.put("user mobile", userMobile);
 
         db.collection("meals").document(getIntent().getStringExtra("mealName")).collection("Meal Request").document(mAuth.getCurrentUser().getUid())
                 .set(req)
@@ -136,6 +137,7 @@ public class mealViewForOthers extends AppCompatActivity {
             public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
                 userName = value.getString("Name");
                 userInstitution = value.getString("Institution");
+                userMobile = value.getString("Mobile Number");
             }
         });
 

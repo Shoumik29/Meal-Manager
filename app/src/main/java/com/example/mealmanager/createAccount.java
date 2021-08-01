@@ -107,6 +107,7 @@ public class createAccount extends AppCompatActivity {
         user.put("Mobile Number", mobileNumber);
         user.put("Institution", institution);
         user.put("Meal name", null);
+        user.put("Manager Status", false);
 
         // Add a new document with a generated ID
         db.collection("users").document(CurrentUserID)

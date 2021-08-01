@@ -62,6 +62,7 @@ public class mealRequestList extends AppCompatActivity {
                             obj.setUserInstitution(d.getString("user institution"));
                             obj.setUserId(d.getId());
                             obj.setMealName(getIntent().getStringExtra("mealName"));
+                            obj.setUserMobile(d.getString("user mobile"));
                             requestList.add(obj);
                         }
                         mAdapter.notifyDataSetChanged();

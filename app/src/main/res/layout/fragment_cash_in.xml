@@ -8,123 +8,113 @@
     android:background="#FFFFFF"
     tools:context=".cashInFragment">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <EditText
-            android:id="@+id/editTextTextPersonName3"
-            android:layout_width="288dp"
-            android:layout_height="67dp"
-            android:background="@drawable/round"
-            android:backgroundTint="#9DFAA1"
-            android:ems="10"
-            android:hint="Cash Provider"
-            android:inputType="textPersonName"
-            android:paddingStart="20dp"
-            android:paddingEnd="5dp"
-            android:textColor="#000000"
-            android:textColorHint="#615C5C"
-            android:textSize="18sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.495"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.055" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-        <Button
-            android:id="@+id/button21"
-            android:layout_width="133dp"
-            android:layout_height="43dp"
-            android:background="@drawable/round"
-            android:text="Confirm"
-            android:textSize="18sp"
-            app:backgroundTint="#000000"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.776"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView6"
-            app:layout_constraintVertical_bias="0.02" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="378dp">
 
-        <EditText
-            android:id="@+id/editTextNumberDecimal2"
-            android:layout_width="288dp"
-            android:layout_height="67dp"
-            android:background="@drawable/round"
-            android:backgroundTint="#F6E6B5"
-            android:ems="10"
-            android:hint="Amount of Cash"
-            android:inputType="numberDecimal"
-            android:paddingStart="20dp"
-            android:paddingEnd="5dp"
-            android:textColor="#000000"
-            android:textColorHint="#615C5C"
-            android:textSize="18sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName3"
-            app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName3"
-            app:layout_constraintVertical_bias="0.041" />
+                <EditText
+                    android:id="@+id/editTextTextPersonName3"
+                    android:layout_width="288dp"
+                    android:layout_height="67dp"
+                    android:background="@drawable/round"
+                    android:backgroundTint="#9DFAA1"
+                    android:ems="10"
+                    android:hint="Cash Provider"
+                    android:inputType="textPersonName"
+                    android:paddingStart="20dp"
+                    android:paddingEnd="5dp"
+                    android:textColor="#000000"
+                    android:textColorHint="#615C5C"
+                    android:textSize="18sp"
+                    app:layout_constraintBottom_toTopOf="@+id/editTextNumberDecimal2"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.495"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.78" />
 
-        <TextView
-            android:id="@+id/textView6"
-            android:layout_width="249dp"
-            android:layout_height="46dp"
-            android:paddingStart="5dp"
-            android:paddingTop="10dp"
-            android:paddingEnd="5dp"
-            android:text="Date :"
-            android:textColor="#000000"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/editTextNumberDecimal2"
-            app:layout_constraintTop_toBottomOf="@+id/editTextNumberDecimal2"
-            app:layout_constraintVertical_bias="0.034" />
+                <Button
+                    android:id="@+id/button21"
+                    android:layout_width="133dp"
+                    android:layout_height="43dp"
+                    android:background="@drawable/round"
+                    android:text="Confirm"
+                    android:textSize="18sp"
+                    app:backgroundTint="#000000"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.776"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.871" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraintLayout2"
-            android:layout_width="411dp"
-            android:layout_height="401dp"
-            android:background="@drawable/oneside_corner"
-            android:backgroundTint="#FFD65A"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/button21"
-            app:layout_constraintVertical_bias="1.0">
+                <EditText
+                    android:id="@+id/editTextNumberDecimal2"
+                    android:layout_width="288dp"
+                    android:layout_height="67dp"
+                    android:background="@drawable/round"
+                    android:backgroundTint="#F6E6B5"
+                    android:ems="10"
+                    android:hint="Amount of Cash"
+                    android:inputType="numberDecimal"
+                    android:paddingStart="20dp"
+                    android:paddingEnd="5dp"
+                    android:textColor="#000000"
+                    android:textColorHint="#615C5C"
+                    android:textSize="18sp"
+                    app:layout_constraintBottom_toTopOf="@+id/textView6"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName3"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.918" />
 
-            <TextView
-                android:id="@+id/textView38"
-                android:layout_width="151dp"
-                android:layout_height="38dp"
-                android:text="Payment History"
-                android:textColor="#000000"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.044" />
+                <TextView
+                    android:id="@+id/textView6"
+                    android:layout_width="249dp"
+                    android:layout_height="46dp"
+                    android:paddingStart="5dp"
+                    android:paddingTop="10dp"
+                    android:paddingEnd="5dp"
+                    android:text="Date :"
+                    android:textColor="#000000"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toTopOf="@+id/button21"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.079"
+                    app:layout_constraintStart_toStartOf="@+id/editTextNumberDecimal2"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.951" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:paddingStart="20dp"
-                android:paddingEnd="20dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView38" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:layout_width="0dp"
+                    android:layout_height="357dp"
+                    android:background="@drawable/oneside_corner"
+                    android:backgroundTint="#FFD761"
+                    android:paddingStart="20dp"
+                    android:paddingTop="20dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+    </ScrollView>
 
 </FrameLayout>

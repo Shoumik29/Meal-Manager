@@ -77,19 +77,12 @@ public class BorderList extends AppCompatActivity {
                     public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                         List<DocumentSnapshot> list = queryDocumentSnapshots.getDocuments();
                         for (DocumentSnapshot d : list) {
-                            String data = d.getString("Border name");
-                            if(searchBox.getText().toString().trim().equals("")){
-                                Toast.makeText(BorderList.this,"Insert text to search", Toast.LENGTH_SHORT).show();
-                                userSearchModel obj = d.toObject(userSearchModel.class);
-                                obj.setUserName(d.getString("Border name"));
-                                obj.setUserInstitution(d.getString("Border institution"));
-                                obj.setUserId(d.getId());
-                                borderArrayList.add(obj);
-                            }
+                            String data = d.getString("B name");
+                            if(searchBox.getText().toString().trim().equals("")) {Toast.makeText(BorderList.this,"Insert text to search", Toast.LENGTH_SHORT).show(); return;}
                             else if (data.startsWith(searchBox.getText().toString().trim())) {
                                 userSearchModel obj = d.toObject(userSearchModel.class);
-                                obj.setUserName(d.getString("Border name"));
-                                obj.setUserInstitution(d.getString("Border institution"));
+                                obj.setUserName(d.getString("B name"));
+                                obj.setUserInstitution(d.getString("B institution"));
                                 obj.setUserId(d.getId());
                                 borderArrayList.add(obj);
                             }
@@ -121,8 +114,8 @@ public class BorderList extends AppCompatActivity {
                         List<DocumentSnapshot> list = queryDocumentSnapshots.getDocuments();
                         for(DocumentSnapshot d: list){
                             userSearchModel obj = d.toObject(userSearchModel.class);
-                            obj.setUserName(d.getString("Border name"));
-                            obj.setUserInstitution(d.getString("Border institution"));
+                            obj.setUserName(d.getString("B name"));
+                            obj.setUserInstitution(d.getString("B institution"));
                             obj.setUserId(d.getId());
                             borderArrayList.add(obj);
                         }

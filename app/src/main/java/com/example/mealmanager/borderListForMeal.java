@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -22,6 +23,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.io.Serializable;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -36,7 +38,7 @@ public class borderListForMeal extends AppCompatActivity{
     public FirebaseFirestore mDocs;
     public borderListForMealAdapter mAdapter;
     public Calendar calendar;
-    public ArrayList<String> bordersForMeal;
+    public Map<String, String> bordersForMeal;
     Button ok;
     public String date;
 
@@ -46,7 +48,7 @@ public class borderListForMeal extends AppCompatActivity{
         setContentView(R.layout.activity_border_list_for_meal);
 
         borderArrayList = new ArrayList<>();
-        bordersForMeal = new ArrayList<>();
+        bordersForMeal = new HashMap<>();
         mDocs = FirebaseFirestore.getInstance();
         mAdapter = new borderListForMealAdapter(borderArrayList, getApplicationContext());
         calendar = Calendar.getInstance();
@@ -58,6 +60,25 @@ public class borderListForMeal extends AppCompatActivity{
 
         bordersForMeal = mAdapter.getBordersForMeal();
 
+        date = DateFormat.getDateInstance(DateFormat.DEFAULT).format(calendar.getTime());
+
+        mDocs.collection("meals").document(getIntent().getStringExtra("mealName")).collection("Borders")
+                .addSnapshotListener(new EventListener<QuerySnapshot>() {
+                    @Override
+                    public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                        List<DocumentSnapshot> list = value.getDocuments();
+                        for(DocumentSnapshot d: list){
+                            userSearchModel obj = d.toObject(userSearchModel.class);
+                            obj.setUserName(d.getString("B name"));
+                            obj.setUserInstitution(d.getString("B institution"));
+                            obj.setUserId(d.getId());
+                            borderArrayList.add(obj);
+                        }
+
+                        mAdapter.notifyDataSetChanged();
+                    }
+                });
+
         ok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -68,34 +89,19 @@ public class borderListForMeal extends AppCompatActivity{
 
     private void pressOK() {
        Toast.makeText(borderListForMeal.this, String.format("Total Selected Border %s", String.valueOf(bordersForMeal.size())) , Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent();
-        intent.putStringArrayListExtra("Borders List", bordersForMeal);
-        setResult(RESULT_OK, intent);
-        finish();
+
+       Bundle bundle = new Bundle();
+       bundle.putSerializable("Borders List", (Serializable) bordersForMeal);
+
+       Intent intent = new Intent();
+       intent.putExtra("Borders List", bundle);
+       setResult(RESULT_OK, intent);
+       finish();
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-
-        date = DateFormat.getDateInstance(DateFormat.DEFAULT).format(calendar.getTime());
-
-        mDocs.collection("meals").document(getIntent().getStringExtra("mealName")).collection("Borders")
-                .addSnapshotListener(new EventListener<QuerySnapshot>() {
-                    @Override
-                    public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
-                        List<DocumentSnapshot> list = value.getDocuments();
-                        for(DocumentSnapshot d: list){
-                            userSearchModel obj = d.toObject(userSearchModel.class);
-                            obj.setUserName(d.getString("Border name"));
-                            obj.setUserInstitution(d.getString("Border institution"));
-                            obj.setUserId(d.getId());
-                            borderArrayList.add(obj);
-                        }
-
-                        mAdapter.notifyDataSetChanged();
-                    }
-                });
     }
 
 }

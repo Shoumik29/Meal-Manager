@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public Toolbar toolbar;
     public NavigationView navigationView;
     public FirebaseFirestore db;
-    public boolean meal;
+    public boolean meal, managerStatus;
     public String meal_name;
     public Fragment home;
     public Bundle data;
@@ -83,7 +83,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     case R.id.fragment_cash: temp = new cashInFragment();
                     toolbar.setTitle("Cash In");
                     break;
-                    case R.id.fragment_myMeal: temp = new myMealFragment();
+                    case R.id.fragment_myMeal:
+                        if(meal){
+                            if(managerStatus) temp = new myMealFragment();
+                            else temp = new myMealForBordersFragment();
+                        }
+                        else temp = new createMyMeal();
                     toolbar.setTitle("My Meal");
                 }
                 data.putString("mealName", meal_name);
@@ -140,6 +145,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         meal = false;
                         meal_name = null;
                     }
+                    if(value.getBoolean("Manager Status")) managerStatus = true;
+                    else managerStatus = false;
                 }
             });
         }

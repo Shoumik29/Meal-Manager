@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -23,18 +24,22 @@ import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 
+import java.text.DateFormat;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
 public class createMeal extends AppCompatActivity {
 
-    public EditText mealName, numOfMeals, mealFinishDate;
+    public EditText mealName, numOfMeals;
     public Button createMeal;
     public FirebaseFirestore docs;
     public FirebaseAuth mAuth;
     public DocumentReference refU, refM;
     public FirebaseUser user;
-    public String userName;
+    public String userName, date;
+    public Calendar calendar;
+    public TextView dateText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,11 +49,12 @@ public class createMeal extends AppCompatActivity {
         docs = FirebaseFirestore.getInstance();
         mAuth = FirebaseAuth.getInstance();
         user = mAuth.getCurrentUser();
+        calendar = Calendar.getInstance();
 
         mealName = (EditText) findViewById(R.id.eTMealName);
         numOfMeals = (EditText) findViewById(R.id.eTNumOfMeals);
-        mealFinishDate = (EditText) findViewById(R.id.eTMealFinishDate);
         createMeal = (Button) findViewById(R.id.button7);
+        dateText = (TextView)findViewById(R.id.textView55);
 
         refU = docs.collection("users").document(user.getUid());
 
@@ -65,6 +71,10 @@ public class createMeal extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+
+        date = DateFormat.getDateInstance(DateFormat.DEFAULT).format(calendar.getTime());
+        dateText.append(DateFormat.getDateInstance(DateFormat.DEFAULT).format(calendar.getTime()));
+
         refU.addSnapshotListener(new EventListener<DocumentSnapshot>() {
             @Override
             public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
@@ -77,7 +87,7 @@ public class createMeal extends AppCompatActivity {
 
         String meal_name = mealName.getText().toString().trim();
         String num_of_meals = numOfMeals.getText().toString().trim();
-        String meal_finish_date = mealFinishDate.getText().toString().trim();
+        String meal_starting_date = dateText.getText().toString().trim();
 
         refM = docs.collection("meals").document(meal_name);
 
@@ -86,7 +96,7 @@ public class createMeal extends AppCompatActivity {
         Map<String, Object> meal = new HashMap<>();
         meal.put("meal name", meal_name);
         meal.put("number of meals", num_of_meals);
-        meal.put("meal finish date", meal_finish_date);
+        meal.put("meal starting date", meal_starting_date);
         meal.put("manager ID", userId);
         meal.put("manager name", userName);
 
@@ -104,6 +114,7 @@ public class createMeal extends AppCompatActivity {
                                                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                                                     @Override
                                                     public void onComplete(@NonNull Task<Void> task) {
+                                                        refU.update("Manager Status", true);
                                                         Toast.makeText(createMeal.this,"Meal & user data entry done", Toast.LENGTH_SHORT).show();
                                                     }
                                                 });
@@ -127,6 +138,9 @@ public class createMeal extends AppCompatActivity {
     public Map<String, Object> getUserData(){
 
         Map<String, Object> userM = new HashMap<>();
+        userM.put("paid", 0);
+        userM.put("spend", 0);
+        userM.put("number of meals", 0);
 
         refU.get()
                 .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -134,8 +148,9 @@ public class createMeal extends AppCompatActivity {
                     public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                         if (task.isSuccessful()){
                             DocumentSnapshot d = task.getResult();
-                            userM.put("Border name", d.getString("Name"));
-                            userM.put("Border institution", d.getString("Institution"));
+                            userM.put("B name", d.getString("Name"));
+                            userM.put("B institution", d.getString("Institution"));
+                            userM.put("B Mobile", d.getString("Mobile Number"));
                         }
                     }
                 });

@@ -6,79 +6,88 @@
     android:layout_height="match_parent"
     tools:context=".BorderList">
 
-    <EditText
-        android:id="@+id/searchBordersList"
-        android:layout_width="342dp"
-        android:layout_height="61dp"
-        android:background="@drawable/round"
-        android:backgroundTint="#ADDBFF"
-        android:ems="10"
-        android:hint="Search Borders Here"
-        android:inputType="textPersonName"
-        android:paddingStart="20dp"
-        android:paddingEnd="60dp"
-        android:textColor="#3551F3"
-        android:textColorHint="#556DEF"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.492"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.059" />
 
-    <ImageView
-        android:id="@+id/imageViewBorder"
-        android:layout_width="52dp"
-        android:layout_height="50dp"
-        android:paddingBottom="10dp"
-        app:layout_constraintBottom_toBottomOf="@+id/searchBordersList"
-        app:layout_constraintEnd_toEndOf="@+id/searchBordersList"
-        app:layout_constraintHorizontal_bias="0.951"
-        app:layout_constraintStart_toStartOf="@+id/searchBordersList"
-        app:layout_constraintTop_toTopOf="@+id/searchBordersList"
-        app:layout_constraintVertical_bias="1.0"
-        app:srcCompat="@drawable/search_icon" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout4"
-        android:layout_width="0dp"
-        android:layout_height="569dp"
-        android:background="@drawable/oneside_corner"
-        android:backgroundTint="#FFD65A"
-        android:elevation="20dp"
-        android:foregroundGravity="bottom"
-        android:paddingTop="20dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchBordersList"
-        app:layout_constraintVertical_bias="1.0">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="70dp">
 
-        <ImageView
-            android:id="@+id/imageView18"
-            android:layout_width="144dp"
-            android:layout_height="129dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/not_found" />
+            <EditText
+                android:id="@+id/searchBordersList"
+                android:layout_width="342dp"
+                android:layout_height="61dp"
+                android:background="@drawable/round"
+                android:backgroundTint="#ADDBFF"
+                android:ems="10"
+                android:hint="Search Borders Here"
+                android:inputType="textPersonName"
+                android:paddingStart="20dp"
+                android:paddingEnd="60dp"
+                android:textColor="#3551F3"
+                android:textColorHint="#556DEF"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.492"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.059" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/borderList"
-            android:layout_width="0dp"
-            android:layout_height="541dp"
-            android:paddingStart="20dp"
-            android:paddingTop="20dp"
-            android:paddingEnd="20dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="1.0">
+            <ImageView
+                android:id="@+id/imageViewBorder"
+                android:layout_width="52dp"
+                android:layout_height="50dp"
+                android:paddingBottom="10dp"
+                app:layout_constraintBottom_toBottomOf="@+id/searchBordersList"
+                app:layout_constraintEnd_toEndOf="@+id/searchBordersList"
+                app:layout_constraintHorizontal_bias="0.951"
+                app:layout_constraintStart_toStartOf="@+id/searchBordersList"
+                app:layout_constraintTop_toTopOf="@+id/searchBordersList"
+                app:layout_constraintVertical_bias="1.0"
+                app:srcCompat="@drawable/search_icon" />
 
-        </androidx.recyclerview.widget.RecyclerView>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout4"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="50dp"
+            android:background="@drawable/oneside_corner"
+            android:backgroundTint="#FFD65A"
+            android:elevation="20dp"
+            android:foregroundGravity="bottom"
+            android:paddingTop="20dp">
+
+            <ImageView
+                android:id="@+id/imageView18"
+                android:layout_width="144dp"
+                android:layout_height="129dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/not_found" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/borderList"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:paddingStart="20dp"
+                android:paddingTop="20dp"
+                android:paddingEnd="20dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="1.0">
+
+            </androidx.recyclerview.widget.RecyclerView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -51,6 +51,7 @@ public class requestAdapter extends RecyclerView.Adapter<requestAdapter.ViewHold
         holder.uId = dataList.get(position).getUserId();
         holder.borderName = dataList.get(position).getUserName();
         holder.borderInstitution = dataList.get(position).getUserInstitution();
+        holder.borderMobile = dataList.get(position).getUserMobile();
     }
 
     @Override
@@ -63,7 +64,7 @@ public class requestAdapter extends RecyclerView.Adapter<requestAdapter.ViewHold
         public TextView userName, userInstitution;
         public Button confirmB, declineB;
         public FirebaseFirestore db;
-        public String mealName, uId, borderName, borderInstitution;
+        public String mealName, uId, borderName, borderInstitution, borderMobile;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -104,9 +105,13 @@ public class requestAdapter extends RecyclerView.Adapter<requestAdapter.ViewHold
 
         private void confirmRequest() {
 
-            Map<String, Object> UM = getUserData();
-            UM.put("Border name", borderName);
-            UM.put("Border institution", borderInstitution);
+            Map<String, Object> UM = new HashMap<>();
+            UM.put("B name", borderName);
+            UM.put("B institution", borderInstitution);
+            UM.put("B Mobile", borderMobile);
+            UM.put("paid", 0);
+            UM.put("spend", 0);
+            UM.put("number of meals", 0);
 
             db.collection("meals").document(mealName).collection("Meal Request").document(uId).delete();
             db.collection("meals").document(mealName).collection("Borders").document(uId)
@@ -125,24 +130,5 @@ public class requestAdapter extends RecyclerView.Adapter<requestAdapter.ViewHold
                     });
         }
 
-        public Map<String, Object> getUserData(){
-
-            Map<String, Object> userM = new HashMap<>();
-
-            db.collection("users").document(uId).get()
-                    .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                        @Override
-                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                            if (task.isSuccessful()){
-                                DocumentSnapshot d = task.getResult();
-                                userM.put("Border name", d.getString("Name"));
-                                userM.put("Border institution", d.getString("Institution"));
-                            }
-                        }
-                    });
-
-            return userM;
-
-        }
     }
 }
