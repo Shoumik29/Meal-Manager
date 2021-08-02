@@ -39,18 +39,21 @@ public class borderListForMeal extends AppCompatActivity{
     public borderListForMealAdapter mAdapter;
     public Calendar calendar;
     public Map<String, String> bordersForMeal;
-    Button ok;
+    public Button ok;
     public String date;
+    public ArrayList<Integer> mealSelection;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_border_list_for_meal);
 
+        mealSelection = new ArrayList<>();
         borderArrayList = new ArrayList<>();
         bordersForMeal = new HashMap<>();
         mDocs = FirebaseFirestore.getInstance();
-        mAdapter = new borderListForMealAdapter(borderArrayList, getApplicationContext());
+        mealSelection = getIntent().getIntegerArrayListExtra("mealSelect");
+        mAdapter = new borderListForMealAdapter(borderArrayList, getApplicationContext(), mealSelection);
         calendar = Calendar.getInstance();
 
         ok = (Button)findViewById(R.id.button20);

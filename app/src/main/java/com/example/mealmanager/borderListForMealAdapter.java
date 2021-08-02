@@ -35,6 +35,7 @@ public class borderListForMealAdapter extends RecyclerView.Adapter<borderListFor
     ArrayList<userSearchModel> dataList;
     Context context;
     Map<String, String> bordersForMeal;
+    ArrayList<Integer> mealSelect;
 
 
 
@@ -42,10 +43,11 @@ public class borderListForMealAdapter extends RecyclerView.Adapter<borderListFor
         return bordersForMeal;
     }
 
-    public borderListForMealAdapter(ArrayList<userSearchModel> dataList, Context context){
+    public borderListForMealAdapter(ArrayList<userSearchModel> dataList, Context context, ArrayList<Integer> mealSelect){
         bordersForMeal = new HashMap<>();
         this.dataList = dataList;
         this.context = context;
+        this.mealSelect = mealSelect;
     }
 
     @NonNull
@@ -118,6 +120,12 @@ public class borderListForMealAdapter extends RecyclerView.Adapter<borderListFor
             }
         });
 
+        if(mealSelect.get(0).equals(0)) {holder.breakfast.setChecked(false); holder.breakfast.setEnabled(false);}
+        else {holder.breakfast.setChecked(true); holder.breakfast.setEnabled(true);}
+        if(mealSelect.get(1).equals(0)) {holder.lunch.setChecked(false); holder.lunch.setEnabled(false);}
+        else {holder.lunch.setChecked(true); holder.lunch.setEnabled(true);}
+        if(mealSelect.get(2).equals(0)) {holder.dinner.setChecked(false); holder.dinner.setEnabled(false);}
+        else {holder.dinner.setChecked(true); holder.dinner.setEnabled(true);}
 
     }
 
