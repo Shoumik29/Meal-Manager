@@ -9,7 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MealManager">
-        <activity android:name=".mealHistoryView"></activity>
+        <activity
+            android:name=".MainActivity"
+            android:exported="false" />
+        <activity android:name=".mealHistoryView" />
         <activity android:name=".mealHistory" />
         <activity android:name=".borderListForMeal" />
         <activity android:name=".todayMeal" />
@@ -29,7 +32,7 @@
         <activity android:name=".payment" />
         <activity android:name=".account_settings" />
         <activity android:name=".log_in_activity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".splashscreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
