@@ -3,13 +3,20 @@ package com.example.mealmanager;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
+import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -17,6 +24,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
@@ -29,17 +37,17 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.zip.Inflater;
 
 public class todayMeal extends AppCompatActivity {
 
     public Calendar calendar;
-    public TextView dateText;
-    public TextView numberOfBorders, numHalfMeal, numFullMeal;
-    public Button selectBorder;
+    public EditText ETmealRate;
+    public TextView dateText, numberOfBorders, numHalfMeal, numFullMeal;
+    public Button selectBorder, confirmMeal, checkTotal;
     public FirebaseFirestore docs;
     public String date;
     public Map<String, String> bordersForMeal;
-    public Button confirmMeal;
     public RadioButton halfMeal, fullMeal;
     public ArrayList<Integer> mealSelect;
     public int HalfMeal, FullMeal;
@@ -56,16 +64,18 @@ public class todayMeal extends AppCompatActivity {
 
         numberOfBorders = (TextView)findViewById(R.id.textView33);
         dateText = (TextView)findViewById(R.id.textView36);
-        selectBorder = (Button) findViewById(R.id.button18);
-        confirmMeal = (Button) findViewById(R.id.button19);
+        selectBorder = (Button)findViewById(R.id.button18);
+        confirmMeal = (Button)findViewById(R.id.button19);
+        checkTotal = (Button)findViewById(R.id.button9);
         halfMeal = (RadioButton)findViewById(R.id.radioButton2);
         fullMeal = (RadioButton)findViewById(R.id.radioButton);
         numHalfMeal = (TextView)findViewById(R.id.textView38);
         numFullMeal = (TextView)findViewById(R.id.textView57);
+        ETmealRate = (EditText)findViewById(R.id.editTextNumber);
 
 
         dateText.setText("Today's Date : ");
-        numberOfBorders.setText("Number of Borders : ");
+        numberOfBorders.setText("Number of Borders : 0");
 
         dateText.append(DateFormat.getDateInstance(DateFormat.DEFAULT).format(calendar.getTime()));
 
@@ -101,20 +111,51 @@ public class todayMeal extends AppCompatActivity {
             }
         });
 
+        checkTotal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(TextUtils.isEmpty(ETmealRate.getText().toString().trim())) ETmealRate.setError("Enter Meal Rate");
+                else popDialog();
+            }
+        });
+
         confirmMeal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                confirmMeal();
+                if(TextUtils.isEmpty(ETmealRate.getText().toString().trim())) ETmealRate.setError("Enter Meal Rate");
+                else confirmMeal();
             }
         });
 
     }
 
+    private void popDialog() {
+        if(bordersForMeal.size() == 0) Toast.makeText(todayMeal.this, "Select Borders First", Toast.LENGTH_SHORT).show();
+        else{
+            String mealRate = ETmealRate.getText().toString().trim();
+
+            int mealRateINT = HalfMeal*((Integer.parseInt(mealRate))/2) + (FullMeal*Integer.parseInt(mealRate));
+
+            Dialog dialog = new Dialog(this);
+            dialog.setContentView(R.layout.popup_layout);
+            TextView dialogMealRate = dialog.findViewById(R.id.textView67);
+            dialogMealRate.setText(String.format("Total Meal Cost: %s",String.valueOf(mealRateINT)));
+            dialog.show();
+        }
+    }
+
     private void confirmMeal() {
+
+        String mealRate = ETmealRate.getText().toString().trim();
+        int mealRateINT = HalfMeal*((Integer.parseInt(mealRate))/2) + (FullMeal*Integer.parseInt(mealRate));
 
         Map<String, Object> bordersMeal = new HashMap<>();
         bordersMeal.put("Borders", bordersForMeal);
         bordersMeal.put("Date", date);
+        bordersMeal.put("Num of HalfMeal", HalfMeal);
+        bordersMeal.put("Num of FullMeal", FullMeal);
+        bordersMeal.put("Meal Rate", mealRate);
+        bordersMeal.put("Total Meal Cost", mealRateINT);
 
         docs.collection("meals").document(getIntent().getStringExtra("mealName")).collection("Meal History").document(String.format("Meal %s", date))
                 .set(bordersMeal)

@@ -12,7 +12,6 @@
         android:id="@+id/textView38"
         android:layout_width="wrap_content"
         android:layout_height="32dp"
-        android:text="Number of Half Meal"
         android:textColor="#000000"
         android:textSize="18sp"
         android:textStyle="bold"
@@ -142,5 +141,33 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/textView38"
         app:layout_constraintTop_toBottomOf="@+id/textView38" />
+
+    <EditText
+        android:id="@+id/editTextNumber"
+        android:layout_width="127dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="number"
+        app:layout_constraintBottom_toTopOf="@+id/button18"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/textView34"
+        app:layout_constraintTop_toBottomOf="@+id/textView57"
+        app:layout_constraintVertical_bias="0.437" />
+
+    <Button
+        android:id="@+id/button9"
+        android:layout_width="118dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/round"
+        android:elevation="20dp"
+        android:text="Check Total"
+        android:textColor="#000000"
+        app:layout_constraintBottom_toTopOf="@+id/button19"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.393"
+        app:layout_constraintStart_toEndOf="@+id/button18"
+        app:layout_constraintTop_toBottomOf="@+id/editTextNumber"
+        app:layout_constraintVertical_bias="0.38" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
