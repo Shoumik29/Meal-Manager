@@ -19,36 +19,22 @@
 
 
         <CheckBox
-            android:id="@+id/checkBox3"
+            android:id="@+id/checkBox2"
             android:layout_width="100dp"
-            android:layout_height="31dp"
-            android:text="BreakFast"
+            android:layout_height="30dp"
+            android:text="Half Meal"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/checkBox2"
+            app:layout_constraintEnd_toStartOf="@+id/checkBox"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintHorizontal_chainStyle="spread"
             app:layout_constraintStart_toEndOf="@+id/BLMmealimage"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.968" />
 
         <CheckBox
-            android:id="@+id/checkBox2"
-            android:layout_width="70dp"
-            android:layout_height="31dp"
-            android:text="Lunch"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/checkBox"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/checkBox3"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.968" />
-
-        <CheckBox
             android:id="@+id/checkBox"
-            android:layout_width="80dp"
-            android:layout_height="31dp"
-            android:text="Dinner"
+            android:layout_width="99dp"
+            android:layout_height="33dp"
+            android:text="Full Meal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"

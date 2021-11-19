@@ -8,8 +8,8 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/borderListMeal"
-        android:layout_width="413dp"
-        android:layout_height="590dp"
+        android:layout_width="0dp"
+        android:layout_height="479dp"
         android:background="@drawable/oneside_corner"
         android:backgroundTint="#88CAFF"
         android:elevation="30dp"
@@ -30,10 +30,10 @@
         android:elevation="30dp"
         android:text="Confirm Selection"
         android:textColor="#000000"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/borderListMeal"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.531"
+        app:layout_constraintHorizontal_bias="0.532"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.087" />
+        app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

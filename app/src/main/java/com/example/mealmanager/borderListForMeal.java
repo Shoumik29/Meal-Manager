@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.os.Parcelable;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -28,6 +29,7 @@ import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -42,19 +44,23 @@ public class borderListForMeal extends AppCompatActivity{
     public Button ok;
     public String date;
     public ArrayList<Integer> mealSelection;
+    public int halfMeal, fullMeal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_border_list_for_meal);
 
+        //Initializations
         mealSelection = new ArrayList<>();
         borderArrayList = new ArrayList<>();
         bordersForMeal = new HashMap<>();
-        mDocs = FirebaseFirestore.getInstance();
         mealSelection = getIntent().getIntegerArrayListExtra("mealSelect");
+        mDocs = FirebaseFirestore.getInstance();
         mAdapter = new borderListForMealAdapter(borderArrayList, getApplicationContext(), mealSelection);
         calendar = Calendar.getInstance();
+        halfMeal = 0;
+        fullMeal = 0;
 
         ok = (Button)findViewById(R.id.button20);
         recyclerView = (RecyclerView)findViewById(R.id.borderListMeal);
@@ -62,6 +68,7 @@ public class borderListForMeal extends AppCompatActivity{
         recyclerView.setAdapter(mAdapter);
 
         bordersForMeal = mAdapter.getBordersForMeal();
+
 
         date = DateFormat.getDateInstance(DateFormat.DEFAULT).format(calendar.getTime());
 
@@ -77,10 +84,11 @@ public class borderListForMeal extends AppCompatActivity{
                             obj.setUserId(d.getId());
                             borderArrayList.add(obj);
                         }
-
                         mAdapter.notifyDataSetChanged();
                     }
                 });
+
+        mAdapter.notifyDataSetChanged();
 
         ok.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,13 +99,26 @@ public class borderListForMeal extends AppCompatActivity{
     }
 
     private void pressOK() {
-       Toast.makeText(borderListForMeal.this, String.format("Total Selected Border %s", String.valueOf(bordersForMeal.size())) , Toast.LENGTH_SHORT).show();
+       //Toast.makeText(borderListForMeal.this, String.format("Total Selected Full Meal %s", String.valueOf(bordersForMeal.size())) , Toast.LENGTH_SHORT).show();
+//        int i=5;
+        //String value = bordersForMeal.values().toString();
+        for (Map.Entry<String, String> entry : bordersForMeal.entrySet()) {
+            //String key = entry.getKey();
+            String value = entry.getValue();
+            if(value.charAt(0) == '1') halfMeal++;
+            if(value.charAt(1) == '1') fullMeal++;
+        }
+
+        //Toast.makeText(borderListForMeal.this, String.format("Value is : %s", String.valueOf(halfMeal)), Toast.LENGTH_SHORT).show();
 
        Bundle bundle = new Bundle();
        bundle.putSerializable("Borders List", (Serializable) bordersForMeal);
 
+
        Intent intent = new Intent();
        intent.putExtra("Borders List", bundle);
+       intent.putExtra("halfMeal", halfMeal);
+       intent.putExtra("fullMeal", fullMeal);
        setResult(RESULT_OK, intent);
        finish();
     }

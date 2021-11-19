@@ -18,6 +18,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.recyclerview.selection.SelectionTracker;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -35,9 +36,7 @@ public class borderListForMealAdapter extends RecyclerView.Adapter<borderListFor
     ArrayList<userSearchModel> dataList;
     Context context;
     Map<String, String> bordersForMeal;
-    ArrayList<Integer> mealSelect;
-
-
+    ArrayList<Integer>  mealSelect;
 
     public Map<String, String> getBordersForMeal() {
         return bordersForMeal;
@@ -62,70 +61,60 @@ public class borderListForMealAdapter extends RecyclerView.Adapter<borderListFor
     public void onBindViewHolder(@NonNull borderListForMealAdapter.ViewHolder holder, int position) {
 
         final userSearchModel temp = dataList.get(position);
-        final StringBuffer string = new StringBuffer("111");
+        final StringBuffer string = new StringBuffer(String.valueOf(mealSelect.get(0))+String.valueOf(mealSelect.get(1)));
 
         holder.userName.setText(dataList.get(position).getUserName());
         holder.userInstitution.setText(dataList.get(position).getUserInstitution());
-        holder.breakfast.setChecked(true);
-        holder.lunch.setChecked(true);
-        holder.dinner.setChecked(true);
 
-        bordersForMeal.put(temp.getUserName(),"111");
+        bordersForMeal.put(temp.getUserName(),String.valueOf(mealSelect.get(0))+String.valueOf(mealSelect.get(1)));
 
         holder.cl.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(holder.breakfast.isChecked() || holder.lunch.isChecked() || holder.dinner.isChecked()){
-                    holder.breakfast.setChecked(false);
-                    holder.lunch.setChecked(false);
-                    holder.dinner.setChecked(false);
+                if(holder.halfMeal.isChecked() || holder.fullMeal.isChecked()){
+                    holder.halfMeal.setChecked(false);
+                    holder.fullMeal.setChecked(false);
                     bordersForMeal.remove(temp.getUserName());
+
                 }
                 else{
-                    holder.breakfast.setChecked(true);
-                    holder.lunch.setChecked(true);
-                    holder.dinner.setChecked(true);
-                    bordersForMeal.put(temp.getUserName(),"111");
+                    if(mealSelect.get(0).equals(0)) {holder.halfMeal.setChecked(false);}
+                    else {holder.halfMeal.setChecked(true);}
+                    if(mealSelect.get(1).equals(0)) {holder.fullMeal.setChecked(false);}
+                    else {holder.fullMeal.setChecked(true);}
+
+                    bordersForMeal.put(temp.getUserName(),String.valueOf(mealSelect.get(0))+String.valueOf(mealSelect.get(1)));
+
                 }
             }
         });
 
-        holder.breakfast.setOnClickListener(new View.OnClickListener() {
+        holder.halfMeal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(holder.breakfast.isChecked()) string.setCharAt(0,'1');
-                else string.setCharAt(0,'0');
+                if(holder.halfMeal.isChecked()) {string.setCharAt(0,'1'); string.setCharAt(1,'0'); holder.fullMeal.setChecked(false);}
+                else {string.setCharAt(0,'0');}
                 bordersForMeal.put(temp.getUserName(), string.toString());
-                if(string.toString().equals("000")) bordersForMeal.remove(temp.getUserName());
+                if(string.toString().equals("00")) bordersForMeal.remove(temp.getUserName());
+
             }
         });
 
-        holder.lunch.setOnClickListener(new View.OnClickListener() {
+        holder.fullMeal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(holder.lunch.isChecked())string.setCharAt(1,'1');
-                else string.setCharAt(1,'0');
+                if(holder.fullMeal.isChecked()) {string.setCharAt(1,'1'); string.setCharAt(0,'0'); holder.halfMeal.setChecked(false);}
+                else {string.setCharAt(1,'0');}
                 bordersForMeal.put(temp.getUserName(), string.toString());
-                if(string.toString().equals("000")) bordersForMeal.remove(temp.getUserName());
+                if(string.toString().equals("00")) bordersForMeal.remove(temp.getUserName());
+
             }
         });
 
-        holder.dinner.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(holder.dinner.isChecked()) string.setCharAt(2,'1');
-                else string.setCharAt(2,'0');
-                bordersForMeal.put(temp.getUserName(), string.toString());
-                if(string.toString().equals("000")) bordersForMeal.remove(temp.getUserName());
-            }
-        });
-
-        if(mealSelect.get(0).equals(0)) {holder.breakfast.setChecked(false); holder.breakfast.setEnabled(false);}
-        else {holder.breakfast.setChecked(true); holder.breakfast.setEnabled(true);}
-        if(mealSelect.get(1).equals(0)) {holder.lunch.setChecked(false); holder.lunch.setEnabled(false);}
-        else {holder.lunch.setChecked(true); holder.lunch.setEnabled(true);}
-        if(mealSelect.get(2).equals(0)) {holder.dinner.setChecked(false); holder.dinner.setEnabled(false);}
-        else {holder.dinner.setChecked(true); holder.dinner.setEnabled(true);}
+        if(mealSelect.get(0).equals(0)) {holder.halfMeal.setChecked(false);}
+        else {holder.halfMeal.setChecked(true); holder.fullMeal.setEnabled(false);}
+        if(mealSelect.get(1).equals(0)) {holder.fullMeal.setChecked(false);}
+        else {holder.fullMeal.setChecked(true);}
 
     }
 
@@ -139,7 +128,7 @@ public class borderListForMealAdapter extends RecyclerView.Adapter<borderListFor
         public TextView userName, userInstitution;
         public ImageView profileImage;
         public ConstraintLayout cl;
-        public CheckBox breakfast, lunch, dinner;
+        public CheckBox halfMeal, fullMeal;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -147,9 +136,8 @@ public class borderListForMealAdapter extends RecyclerView.Adapter<borderListFor
             userName = itemView.findViewById(R.id.BLMName);
             userInstitution = itemView.findViewById(R.id.BLMInstitution);
             profileImage = itemView.findViewById(R.id.BLMmealimage);
-            breakfast = itemView.findViewById(R.id.checkBox3);
-            lunch = itemView.findViewById(R.id.checkBox2);
-            dinner = itemView.findViewById(R.id.checkBox);
+            halfMeal = itemView.findViewById(R.id.checkBox2);
+            fullMeal = itemView.findViewById(R.id.checkBox);
             cl = itemView.findViewById(R.id.BLMconstrain);
 
         }

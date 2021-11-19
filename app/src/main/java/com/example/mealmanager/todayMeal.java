@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.RadioButton;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -32,14 +33,16 @@ import java.util.Map;
 public class todayMeal extends AppCompatActivity {
 
     public Calendar calendar;
-    public TextView dateText, numberOfBorders, breakFast, lunch, dinner;
+    public TextView dateText;
+    public TextView numberOfBorders, numHalfMeal, numFullMeal;
     public Button selectBorder;
     public FirebaseFirestore docs;
     public String date;
     public Map<String, String> bordersForMeal;
     public Button confirmMeal;
-    public Switch switchB, switchL,switchD;
+    public RadioButton halfMeal, fullMeal;
     public ArrayList<Integer> mealSelect;
+    public int HalfMeal, FullMeal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,56 +52,44 @@ public class todayMeal extends AppCompatActivity {
         calendar = Calendar.getInstance();
         docs = FirebaseFirestore.getInstance();
         bordersForMeal = new HashMap<>();
-        mealSelect = new ArrayList<Integer>(Arrays.asList(0,0,0));
+        mealSelect = new ArrayList<Integer>(Arrays.asList(0,0));
 
         numberOfBorders = (TextView)findViewById(R.id.textView33);
         dateText = (TextView)findViewById(R.id.textView36);
-        breakFast = (TextView)findViewById(R.id.editTextTextPersonName);
-        lunch = (TextView)findViewById(R.id.editTextTextPersonName4);
-        dinner = (TextView)findViewById(R.id.editTextTextPersonName2);
         selectBorder = (Button) findViewById(R.id.button18);
         confirmMeal = (Button) findViewById(R.id.button19);
-        switchB = (Switch) findViewById(R.id.switch4);
-        switchL = (Switch) findViewById(R.id.switch5);
-        switchD = (Switch) findViewById(R.id.switch6);
+        halfMeal = (RadioButton)findViewById(R.id.radioButton2);
+        fullMeal = (RadioButton)findViewById(R.id.radioButton);
+        numHalfMeal = (TextView)findViewById(R.id.textView38);
+        numFullMeal = (TextView)findViewById(R.id.textView57);
+
 
         dateText.setText("Today's Date : ");
         numberOfBorders.setText("Number of Borders : ");
 
         dateText.append(DateFormat.getDateInstance(DateFormat.DEFAULT).format(calendar.getTime()));
 
-        breakFast.setEnabled(false);
-        lunch.setEnabled(false);
-        dinner.setEnabled(false);
-
-        switchB.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        halfMeal.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked) {breakFast.setEnabled(true); mealSelect.add(0,1);}
-                else {breakFast.setEnabled(false); mealSelect.add(0,0);}
+                if (isChecked) { mealSelect.set(0,1); fullMeal.setChecked(false);}
+                else {mealSelect.set(0,0);}
             }
         });
 
-        switchL.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        fullMeal.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {lunch.setEnabled(true); mealSelect.add(1,1);}
-                else {lunch.setEnabled(false); mealSelect.add(1,0);}
+                if(isChecked) {mealSelect.set(1,1); halfMeal.setChecked(false);}
+                else {mealSelect.set(1,0);}
             }
         });
 
-        switchD.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked) {dinner.setEnabled(true); mealSelect.add(2,1);}
-                else {dinner.setEnabled(false); mealSelect.add(2,0);}
-            }
-        });
 
         selectBorder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!switchB.isChecked() && !switchL.isChecked() && !switchD.isChecked()){
+                if(!halfMeal.isChecked() && !fullMeal.isChecked()){
                     Toast.makeText(todayMeal.this, "Please Select At least One Meal", Toast.LENGTH_SHORT).show();
                 }
                 else{
@@ -151,14 +142,23 @@ public class todayMeal extends AppCompatActivity {
                     bordersForMeal = (Map<String, String>) wrapper.getSerializable("Borders List");
                     numberOfBorders.setText("Number of Borders : "+String.valueOf(bordersForMeal.size()));
                 }
+                HalfMeal = data.getIntExtra("halfMeal",0);
+                FullMeal = data.getIntExtra("fullMeal",0);
             }
         }
+
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-
         date = DateFormat.getDateInstance(DateFormat.DEFAULT).format(calendar.getTime());
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        numFullMeal.setText("Number of Full Meal : "+String.valueOf(FullMeal));
+        numHalfMeal.setText("Number of Half Meal : "+String.valueOf(HalfMeal));
     }
 }
