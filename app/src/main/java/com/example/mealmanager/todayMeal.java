@@ -51,6 +51,8 @@ public class todayMeal extends AppCompatActivity {
     public RadioButton halfMeal, fullMeal;
     public ArrayList<Integer> mealSelect;
     public int HalfMeal, FullMeal;
+    public boolean mealToday;
+    public double totalCost;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -134,7 +136,7 @@ public class todayMeal extends AppCompatActivity {
         else{
             String mealRate = ETmealRate.getText().toString().trim();
 
-            int mealRateINT = HalfMeal*((Integer.parseInt(mealRate))/2) + (FullMeal*Integer.parseInt(mealRate));
+            double mealRateINT = HalfMeal*((Integer.parseInt(mealRate))/2) + (FullMeal*Integer.parseInt(mealRate));
 
             Dialog dialog = new Dialog(this);
             dialog.setContentView(R.layout.popup_layout);
@@ -145,33 +147,79 @@ public class todayMeal extends AppCompatActivity {
     }
 
     private void confirmMeal() {
+        if(mealToday){
+            Toast.makeText(todayMeal.this,"You have Already Created a Meal Today", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        else {
+            String mealRate = ETmealRate.getText().toString().trim();
+            double mealRateDb = HalfMeal*((Double.parseDouble(mealRate))/2) + (FullMeal*Double.parseDouble(mealRate));
 
-        String mealRate = ETmealRate.getText().toString().trim();
-        int mealRateINT = HalfMeal*((Integer.parseInt(mealRate))/2) + (FullMeal*Integer.parseInt(mealRate));
+            Map<String, Object> bordersMeal = new HashMap<>();
+            bordersMeal.put("Borders", bordersForMeal);
+            bordersMeal.put("Date", date);
+            bordersMeal.put("Num of HalfMeal", HalfMeal);
+            bordersMeal.put("Num of FullMeal", FullMeal);
+            bordersMeal.put("Meal Rate", mealRate);
+            bordersMeal.put("Total Meal Cost", mealRateDb);
 
-        Map<String, Object> bordersMeal = new HashMap<>();
-        bordersMeal.put("Borders", bordersForMeal);
-        bordersMeal.put("Date", date);
-        bordersMeal.put("Num of HalfMeal", HalfMeal);
-        bordersMeal.put("Num of FullMeal", FullMeal);
-        bordersMeal.put("Meal Rate", mealRate);
-        bordersMeal.put("Total Meal Cost", mealRateINT);
+            docs.collection("meals").document(getIntent().getStringExtra("mealName")).update("total cash out", totalCost+mealRateDb);
 
-        docs.collection("meals").document(getIntent().getStringExtra("mealName")).collection("Meal History").document(String.format("Meal %s", date))
-                .set(bordersMeal)
-                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        Toast.makeText(todayMeal.this, "Meal Created", Toast.LENGTH_SHORT).show();
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(todayMeal.this, "Action Failed", Toast.LENGTH_SHORT).show();
-                    }
-                });
-        finish();
+            eliminatingMealCost((Double.parseDouble(mealRate))/2, Double.parseDouble(mealRate));
+
+            docs.collection("meals").document(getIntent().getStringExtra("mealName")).collection("Meal History").document(String.format("Meal %s", date))
+                    .set(bordersMeal)
+                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            Toast.makeText(todayMeal.this, "Meal Created", Toast.LENGTH_SHORT).show();
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(todayMeal.this, "Action Failed", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+            finish();
+        }
+    }
+
+    public void eliminatingMealCost(double half, double full){
+        for (Map.Entry<String, String> entry : bordersForMeal.entrySet()) {
+            //String key = entry.getKey();
+            //entry.getValue();
+
+            final double[] numHalf = new double[1];
+            final double[] numFull = new double[1];
+            final double[] spend = new double[1];
+
+            docs.collection("meals").document(getIntent().getStringExtra("mealName")).collection("Borders").document(entry.getKey())
+                    .addSnapshotListener(new EventListener<DocumentSnapshot>() {
+                        @Override
+                        public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
+                            if(error != null) {Toast.makeText(todayMeal.this,"first", Toast.LENGTH_SHORT).show(); return;}
+                            if(value != null && value.exists()){
+                                numHalf[0] = value.getDouble("number of half meals");
+                                numFull[0] = value.getDouble("number of full meals");
+                                spend[0] = value.getDouble("total spend");
+                                //Toast.makeText(todayMeal.this,"working", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+
+            if(entry.getValue().charAt(0) == '1'){
+                docs.collection("meals").document(getIntent().getStringExtra("mealName")).collection("Borders").document(entry.getKey())
+                        .update("number of half meals", numHalf[0] +1.0,
+                                "total spend", spend[0] +half);
+            }
+            if(entry.getValue().charAt(1) == '1'){
+                docs.collection("meals").document(getIntent().getStringExtra("mealName")).collection("Borders").document(entry.getKey())
+                        .update("number of full meals", numFull[0] +1.0,
+                                "total spend", spend[0]+full);
+            }
+
+        }
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -194,6 +242,26 @@ public class todayMeal extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         date = DateFormat.getDateInstance(DateFormat.DEFAULT).format(calendar.getTime());
+
+        docs.collection("meals").document(getIntent().getStringExtra("mealName")).collection("Meal History").document(String.format("Meal %s", date))
+                .get()
+                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        if(documentSnapshot.exists()) mealToday = true;
+                        else mealToday = false;
+                    }
+                });
+
+        docs.collection("meals").document(getIntent().getStringExtra("mealName"))
+                .get()
+                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        if(documentSnapshot.exists()) totalCost = documentSnapshot.getDouble("total cash out");
+                    }
+                });
+
     }
 
     @Override

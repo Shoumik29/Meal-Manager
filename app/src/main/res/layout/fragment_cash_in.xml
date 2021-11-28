@@ -13,13 +13,19 @@
         android:layout_height="match_parent">
 
         <LinearLayout
+            android:id="@+id/linearLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayout8"
                 android:layout_width="match_parent"
-                android:layout_height="378dp">
+                android:layout_height="378dp"
+                app:layout_constraintBottom_toTopOf="@+id/recyclerView"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_chainStyle="spread_inside">
 
                 <EditText
                     android:id="@+id/editTextTextPersonName3"
@@ -28,7 +34,7 @@
                     android:background="@drawable/round"
                     android:backgroundTint="#9DFAA1"
                     android:ems="10"
-                    android:hint="Cash Provider"
+                    android:hint="Cash Provider User ID"
                     android:inputType="textPersonName"
                     android:paddingStart="20dp"
                     android:paddingEnd="5dp"
@@ -103,16 +109,18 @@
                 android:layout_height="match_parent">
 
                 <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerView"
                     android:layout_width="0dp"
                     android:layout_height="357dp"
                     android:background="@drawable/oneside_corner"
                     android:backgroundTint="#FFD761"
                     android:paddingStart="20dp"
                     android:paddingTop="20dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toBottomOf="@+id/constraintLayout8" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>
     </ScrollView>

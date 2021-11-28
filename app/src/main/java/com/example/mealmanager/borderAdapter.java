@@ -1,5 +1,7 @@
 package com.example.mealmanager;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -7,8 +9,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -48,7 +52,20 @@ public class borderAdapter extends RecyclerView.Adapter<borderAdapter.ViewHolder
                 context.startActivity(i);
             }
         });
+
+        holder.copyCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ClipboardManager clipboardManager = (ClipboardManager)context.getSystemService(Context.CLIPBOARD_SERVICE);
+                ClipData clip = ClipData.newPlainText("EditText", temp.getUserId());
+                clipboardManager.setPrimaryClip(clip);
+                Toast.makeText(context,"User ID Copied",Toast.LENGTH_SHORT).show();
+            }
+        });
     }
+
+
+
 
     @Override
     public int getItemCount() {
@@ -60,6 +77,7 @@ public class borderAdapter extends RecyclerView.Adapter<borderAdapter.ViewHolder
         public TextView userName, userInstitution;
         public ImageView profileImage;
         public ConstraintLayout ct;
+        public CardView copyCard;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -68,6 +86,7 @@ public class borderAdapter extends RecyclerView.Adapter<borderAdapter.ViewHolder
             userInstitution = itemView.findViewById(R.id.BLInstitution);
             profileImage = itemView.findViewById(R.id.BLmealimage);
             ct = itemView.findViewById(R.id.BLconstrain);
+            copyCard = itemView.findViewById(R.id.copyCardView);
 
         }
     }

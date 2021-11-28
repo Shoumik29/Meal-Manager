@@ -89,6 +89,7 @@ public class createMeal extends AppCompatActivity {
         String num_of_meals = numOfMeals.getText().toString().trim();
         String meal_starting_date = dateText.getText().toString().trim();
 
+
         refM = docs.collection("meals").document(meal_name);
 
         String userId = user.getUid();
@@ -99,6 +100,8 @@ public class createMeal extends AppCompatActivity {
         meal.put("meal starting date", meal_starting_date);
         meal.put("manager ID", userId);
         meal.put("manager name", userName);
+        meal.put("total cash in", 0.0);
+        meal.put("total cash out", 0.0);
 
         Map<String, Object> UM = getUserData();
 
@@ -138,9 +141,10 @@ public class createMeal extends AppCompatActivity {
     public Map<String, Object> getUserData(){
 
         Map<String, Object> userM = new HashMap<>();
-        userM.put("paid", 0);
-        userM.put("spend", 0);
-        userM.put("number of meals", 0);
+        userM.put("total paid", 0.0);
+        userM.put("total spend", 0.0);
+        userM.put("number of half meals", 0.0);
+        userM.put("number of full meals", 0.0);
 
         refU.get()
                 .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {

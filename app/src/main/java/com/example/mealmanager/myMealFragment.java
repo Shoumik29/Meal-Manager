@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -19,7 +20,9 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
@@ -104,6 +107,7 @@ public class myMealFragment extends Fragment {
                             mealArrayList.add(obj);
                         }
                         Collections.reverse(mealArrayList);
+                        Toast.makeText(getActivity(),String.valueOf(mealArrayList.size()), Toast.LENGTH_SHORT).show();
                         mAdapter.notifyDataSetChanged();
                     }
                 })
@@ -118,6 +122,20 @@ public class myMealFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        mealHistoryDataFetch();
+        mDocs.collection("meals").document(data.getString("mealName"))
+                .get()
+                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        if(documentSnapshot.exists()) mealHistoryDataFetch();
+                        else{
+                            Intent i = new Intent(getActivity(), startMeal.class);
+                            i.putExtra("mealName", data.getString("mealName"));
+                            startActivity(i);
+                        }
+                    }
+                });
     }
 }
+
+

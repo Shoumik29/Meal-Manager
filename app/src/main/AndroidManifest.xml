@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MealManager">
-        <activity android:name=".mealHistoryView"></activity>
+        <activity android:name=".payment_confirmed"></activity>
+        <activity android:name=".mealHistoryView" />
         <activity android:name=".mealHistory" />
         <activity android:name=".borderListForMeal" />
         <activity android:name=".todayMeal" />

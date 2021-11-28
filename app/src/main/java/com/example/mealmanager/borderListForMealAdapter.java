@@ -66,7 +66,7 @@ public class borderListForMealAdapter extends RecyclerView.Adapter<borderListFor
         holder.userName.setText(dataList.get(position).getUserName());
         holder.userInstitution.setText(dataList.get(position).getUserInstitution());
 
-        bordersForMeal.put(temp.getUserName(),String.valueOf(mealSelect.get(0))+String.valueOf(mealSelect.get(1)));
+        bordersForMeal.put(temp.getUserId(),String.valueOf(mealSelect.get(0))+String.valueOf(mealSelect.get(1)));
 
         holder.cl.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,7 +74,7 @@ public class borderListForMealAdapter extends RecyclerView.Adapter<borderListFor
                 if(holder.halfMeal.isChecked() || holder.fullMeal.isChecked()){
                     holder.halfMeal.setChecked(false);
                     holder.fullMeal.setChecked(false);
-                    bordersForMeal.remove(temp.getUserName());
+                    bordersForMeal.remove(temp.getUserId());
 
                 }
                 else{
@@ -83,7 +83,7 @@ public class borderListForMealAdapter extends RecyclerView.Adapter<borderListFor
                     if(mealSelect.get(1).equals(0)) {holder.fullMeal.setChecked(false);}
                     else {holder.fullMeal.setChecked(true);}
 
-                    bordersForMeal.put(temp.getUserName(),String.valueOf(mealSelect.get(0))+String.valueOf(mealSelect.get(1)));
+                    bordersForMeal.put(temp.getUserId(),String.valueOf(mealSelect.get(0))+String.valueOf(mealSelect.get(1)));
 
                 }
             }
@@ -94,7 +94,7 @@ public class borderListForMealAdapter extends RecyclerView.Adapter<borderListFor
             public void onClick(View v) {
                 if(holder.halfMeal.isChecked()) {string.setCharAt(0,'1'); string.setCharAt(1,'0'); holder.fullMeal.setChecked(false);}
                 else {string.setCharAt(0,'0');}
-                bordersForMeal.put(temp.getUserName(), string.toString());
+                bordersForMeal.put(temp.getUserId(), string.toString());
                 if(string.toString().equals("00")) bordersForMeal.remove(temp.getUserName());
 
             }
@@ -105,7 +105,7 @@ public class borderListForMealAdapter extends RecyclerView.Adapter<borderListFor
             public void onClick(View v) {
                 if(holder.fullMeal.isChecked()) {string.setCharAt(1,'1'); string.setCharAt(0,'0'); holder.halfMeal.setChecked(false);}
                 else {string.setCharAt(1,'0');}
-                bordersForMeal.put(temp.getUserName(), string.toString());
+                bordersForMeal.put(temp.getUserId(), string.toString());
                 if(string.toString().equals("00")) bordersForMeal.remove(temp.getUserName());
 
             }
