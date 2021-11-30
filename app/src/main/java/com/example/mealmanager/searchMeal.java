@@ -25,7 +25,7 @@ import java.util.List;
 public class searchMeal extends AppCompatActivity {
 
     public EditText searchText;
-    public ImageView search, back;
+    public ImageView search;
     public RecyclerView recyclerView;
     public ArrayList<mealModel> mealArrayList;
     public FirebaseFirestore mDocs;
@@ -42,7 +42,6 @@ public class searchMeal extends AppCompatActivity {
 
         searchText = (EditText)findViewById(R.id.searchMT);
         search = (ImageView)findViewById(R.id.imageView15);
-        back = (ImageView)findViewById(R.id.imageView16);
         recyclerView = (RecyclerView)findViewById(R.id.resultMList);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(mAdapter);
@@ -54,12 +53,6 @@ public class searchMeal extends AppCompatActivity {
             public void onClick(View v) {
                 mealArrayList.clear();
                 mealSearch();
-            }
-        });
-        back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
             }
         });
     }

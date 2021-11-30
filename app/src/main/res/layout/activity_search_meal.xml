@@ -6,79 +6,71 @@
     android:layout_height="match_parent"
     tools:context=".searchUsers">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/resultMList"
-        android:layout_width="0dp"
-        android:layout_height="485dp"
-        android:paddingStart="30dp"
-        android:paddingEnd="20dp"
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0">
+        app:layout_constraintTop_toTopOf="parent">
 
-    </androidx.recyclerview.widget.RecyclerView>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout3"
-        android:layout_width="0dp"
-        android:layout_height="235dp"
-        android:background="@drawable/down_curve"
-        android:backgroundTint="#FACB3F"
-        android:elevation="10dp"
-        app:layout_constraintBottom_toTopOf="@+id/resultMList"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayout3"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:background="@drawable/down_curve"
+                android:backgroundTint="#FFC107"
+                android:elevation="10dp">
 
-        <EditText
-            android:id="@+id/searchMT"
-            android:layout_width="342dp"
-            android:layout_height="61dp"
-            android:background="@drawable/round"
-            android:backgroundTint="#ADDBFF"
-            android:ems="10"
-            android:hint="Search Meal Here"
-            android:inputType="textPersonName"
-            android:paddingStart="20dp"
-            android:paddingEnd="60dp"
-            android:textColor="#3551F3"
-            android:textColorHint="#556DEF"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.492"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.557" />
+                <EditText
+                    android:id="@+id/searchMT"
+                    android:layout_width="342dp"
+                    android:layout_height="61dp"
+                    android:background="@drawable/round"
+                    android:backgroundTint="#ADDBFF"
+                    android:ems="10"
+                    android:hint="Search Meal Here"
+                    android:inputType="textPersonName"
+                    android:paddingStart="20dp"
+                    android:paddingEnd="60dp"
+                    android:textColor="#3551F3"
+                    android:textColorHint="#556DEF"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.492"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.557" />
 
-        <ImageView
-            android:id="@+id/imageView15"
-            android:layout_width="52dp"
-            android:layout_height="50dp"
-            android:paddingBottom="10dp"
-            app:layout_constraintBottom_toBottomOf="@+id/searchMT"
-            app:layout_constraintEnd_toEndOf="@+id/searchMT"
-            app:layout_constraintHorizontal_bias="0.965"
-            app:layout_constraintStart_toStartOf="@+id/searchMT"
-            app:layout_constraintTop_toTopOf="@+id/searchMT"
-            app:layout_constraintVertical_bias="1.0"
-            app:srcCompat="@drawable/search_icon" />
+                <ImageView
+                    android:id="@+id/imageView15"
+                    android:layout_width="52dp"
+                    android:layout_height="50dp"
+                    android:paddingBottom="10dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/searchMT"
+                    app:layout_constraintEnd_toEndOf="@+id/searchMT"
+                    app:layout_constraintHorizontal_bias="0.965"
+                    app:layout_constraintStart_toStartOf="@+id/searchMT"
+                    app:layout_constraintTop_toTopOf="@+id/searchMT"
+                    app:layout_constraintVertical_bias="1.0"
+                    app:srcCompat="@drawable/search_icon" />
 
-        <ImageView
-            android:id="@+id/imageView16"
-            android:layout_width="69dp"
-            android:layout_height="43dp"
-            app:layout_constraintBottom_toTopOf="@+id/searchMT"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.046"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.481"
-            app:srcCompat="@drawable/abc_vector_test" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/resultMList"
+                android:layout_width="match_parent"
+                android:layout_height="485dp"
+                android:paddingStart="30dp"
+                android:paddingEnd="20dp">
+
+            </androidx.recyclerview.widget.RecyclerView>
+        </LinearLayout>
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
