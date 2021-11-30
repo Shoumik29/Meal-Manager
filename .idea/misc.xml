@@ -3,9 +3,13 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/app work/Meal-Manager/app/src/main/res/drawable-ldpi/avd_done.xml" value="0.2703125" />
         <entry key="..\:/app work/Meal-Manager/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.2703125" />
         <entry key="..\:/app work/Meal-Manager/app/src/main/res/drawable/down_curve.xml" value="0.2703125" />
         <entry key="..\:/app work/Meal-Manager/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2703125" />
+        <entry key="..\:/app work/Meal-Manager/app/src/main/res/drawable/oneside_corner.xml" value="0.2564814814814815" />
+        <entry key="..\:/app work/Meal-Manager/app/src/main/res/drawable/round.xml" value="0.2564814814814815" />
+        <entry key="..\:/app work/Meal-Manager/app/src/main/res/layout/activity_payment_confirmation.xml" value="0.25416666666666665" />
         <entry key="..\:/app work/Meal-Manager/app/src/main/res/layout/activity_splashscreen.xml" value="0.25416666666666665" />
       </map>
     </option>

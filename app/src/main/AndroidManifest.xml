@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MealManager">
         <activity
+            android:name=".paymentConfirmation"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="false" />
         <activity android:name=".mealHistoryView" />
