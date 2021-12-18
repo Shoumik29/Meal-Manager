@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -75,7 +76,6 @@ public class log_in_activity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
-                            FirebaseUser user = mAuth.getCurrentUser();
                             Intent intent = new Intent(log_in_activity.this, MainActivity.class);
                             startActivity(intent);
                             Toast.makeText(log_in_activity.this, "Log in Successfull", Toast.LENGTH_SHORT).show();
@@ -84,6 +84,12 @@ public class log_in_activity extends AppCompatActivity {
                             // If sign in fails, display a message to the user.
                             Toast.makeText(log_in_activity.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
                         }
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(log_in_activity.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
                     }
                 });
     }

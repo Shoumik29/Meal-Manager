@@ -49,7 +49,7 @@ public class profile extends AppCompatActivity {
     private FirebaseAuth mAuth;
     public FirebaseFirestore db;
     public ImageView back, profilePicUp;
-    public Uri imageUri, imageDownloadUri;
+    public Uri imageUri;
     public CircleImageView profilePic;
     public FirebaseStorage storage;
     public StorageReference storageRef;

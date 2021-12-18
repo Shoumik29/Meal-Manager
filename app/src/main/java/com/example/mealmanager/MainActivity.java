@@ -148,7 +148,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         meal = false;
                         meal_name = null;
                     }
-                    if(value.getBoolean("Manager Status")) managerStatus = true;
+                    if(value.getBoolean("Manager Status") && value.getBoolean("Manager Status") != null) managerStatus = true;
                     else managerStatus = false;
                 }
             });

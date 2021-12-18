@@ -26,6 +26,7 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
 
 import java.text.DateFormat;
 import java.util.Calendar;
+import java.util.Objects;
 
 
 public class homeFragment extends Fragment {
@@ -88,45 +89,48 @@ public class homeFragment extends Fragment {
     public void onStart() {
         super.onStart();
 
+        //append er bodole setText korte hbe
         Tdate.append(" "+ DateFormat.getDateInstance(DateFormat.MONTH_FIELD).format(calendar.getTime()));
 
-        userId = currentUser.getUid();
-
-        docs.collection("users").document(userId)
-                .addSnapshotListener(new EventListener<DocumentSnapshot>() {
-                    @Override
-                    public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
-                        if(value != null && value.exists()){
-                            docs.collection("meals").document(value.getString("Meal name"))
-                                    .addSnapshotListener(new EventListener<DocumentSnapshot>() {
-                                        @Override
-                                        public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
-                                            if(value != null && value.exists()){
-                                                TCashIn.append(String.valueOf(value.getDouble("total cash in")));
-                                                TCashOut.append(String.valueOf(value.getDouble("total cash out")));
-                                                double balance;
-                                                balance = value.getDouble("total cash in") - value.getDouble("total cash out");
-                                                if(balance<0){
-                                                    Tbalance.append(String.valueOf(balance));
-                                                    Tbalance.setTextColor(Color.RED);
+        if(currentUser != null){
+            userId = currentUser.getUid();
+            docs.collection("users").document(userId)
+                    .addSnapshotListener(new EventListener<DocumentSnapshot>() {
+                        @Override
+                        public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
+                            if(value != null && value.exists()){
+                                if(value.getString("Meal name") != null){
+                                    docs.collection("meals").document(value.getString("Meal name"))
+                                            .addSnapshotListener(new EventListener<DocumentSnapshot>() {
+                                                @Override
+                                                public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
+                                                    if(value != null && value.exists()){
+                                                        TCashIn.append(String.valueOf(value.getDouble("total cash in")));
+                                                        TCashOut.append(String.valueOf(value.getDouble("total cash out")));
+                                                        double balance;
+                                                        balance = value.getDouble("total cash in") - value.getDouble("total cash out");
+                                                        if(balance<0){
+                                                            Tbalance.append(String.valueOf(balance));
+                                                            Tbalance.setTextColor(Color.RED);
+                                                        }
+                                                        else{
+                                                            Tbalance.append(String.valueOf(balance));
+                                                            Tbalance.setTextColor(Color.parseColor("#228B22"));
+                                                        }
+                                                    }
                                                 }
-                                                else{
-                                                    Tbalance.append(String.valueOf(balance));
-                                                    Tbalance.setTextColor(Color.parseColor("#228B22"));
-                                                }
-                                            }
-                                        }
-                                    });
-
-                            TmealName.setText(value.getString("Meal name"));
-                            Tname.setText(value.getString("Name"));
-                            Tinstitution.setText(value.getString("Institution"));
+                                            });
+                                    TmealName.setText(value.getString("Meal name"));
+                                }
+                                Tname.setText(value.getString("Name"));
+                                Tinstitution.setText(value.getString("Institution"));
+                            }
                         }
-                    }
-                });
-
-
-
-
+                    });
+        }
+        else{
+            Intent intent = new Intent(getActivity(), log_in_activity.class);
+            startActivity(intent);
+        }
     }
 }

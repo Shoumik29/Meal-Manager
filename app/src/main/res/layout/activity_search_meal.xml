@@ -27,6 +27,20 @@
                 android:backgroundTint="#FFC107"
                 android:elevation="10dp">
 
+                <Button
+                    android:id="@+id/aSearch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="38dp"
+                    android:background="@drawable/round"
+                    android:text="Advance Search"
+                    app:backgroundTint="#000000"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/searchMT"
+                    app:layout_constraintVertical_bias="0.901" />
+
                 <EditText
                     android:id="@+id/searchMT"
                     android:layout_width="342dp"
@@ -40,12 +54,13 @@
                     android:paddingEnd="60dp"
                     android:textColor="#3551F3"
                     android:textColorHint="#556DEF"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintBottom_toTopOf="@+id/button10"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.492"
+                    app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.557" />
+                    app:layout_constraintVertical_bias="0.557"
+                    app:layout_constraintVertical_chainStyle="spread" />
 
                 <ImageView
                     android:id="@+id/imageView15"

@@ -5,9 +5,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.ParcelUuid;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -30,6 +32,7 @@ public class searchMeal extends AppCompatActivity {
     public ArrayList<mealModel> mealArrayList;
     public FirebaseFirestore mDocs;
     public mealAdapter mAdapter;
+    public Button aSearchBT;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +45,7 @@ public class searchMeal extends AppCompatActivity {
 
         searchText = (EditText)findViewById(R.id.searchMT);
         search = (ImageView)findViewById(R.id.imageView15);
+        aSearchBT = (Button)findViewById(R.id.aSearch);
         recyclerView = (RecyclerView)findViewById(R.id.resultMList);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(mAdapter);
@@ -53,6 +57,13 @@ public class searchMeal extends AppCompatActivity {
             public void onClick(View v) {
                 mealArrayList.clear();
                 mealSearch();
+            }
+        });
+        aSearchBT.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(searchMeal.this, advanceMealSearch.class);
+                startActivity(i);
             }
         });
     }
@@ -81,6 +92,32 @@ public class searchMeal extends AppCompatActivity {
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         Toast.makeText(searchMeal.this, "search failed", Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mDocs.collection("meals").get()
+                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                    @Override
+                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                        List<DocumentSnapshot> list = queryDocumentSnapshots.getDocuments();
+                        for(DocumentSnapshot d: list){
+                            mealModel obj = d.toObject(mealModel.class);
+                            obj.setMealName(d.getString("meal name"));
+                            obj.setManagerName(d.getString("manager name"));
+                            mealArrayList.add(obj);
+                        }
+
+                        mAdapter.notifyDataSetChanged();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(searchMeal.this, "fetch failed", Toast.LENGTH_SHORT).show();
                     }
                 });
     }
