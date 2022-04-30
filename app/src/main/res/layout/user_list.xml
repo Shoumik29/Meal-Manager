@@ -5,8 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="#FFFFFF"
-    app:cardCornerRadius="5dp"
-    android:elevation="4dp"
+    android:elevation="10dp"
+    app:cardCornerRadius="20dp"
     app:cardUseCompatPadding="true">
 
 
@@ -15,62 +15,67 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#FFFFFF"
-        android:padding="16dp">
+        android:padding="10dp">
 
 
         <ImageView
             android:id="@+id/BLmealimage"
             android:layout_width="129dp"
             android:layout_height="123dp"
+            android:layout_marginLeft="7dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintEnd_toStartOf="@+id/BLName"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_chainStyle="spread"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.75"
+            app:layout_constraintVertical_bias="0.218"
             app:srcCompat="@drawable/logo" />
+
+        <TextView
+            android:id="@+id/BLName"
+            android:layout_width="199dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="7dp"
+            android:layout_marginTop="10dp"
+            android:text="User name"
+            app:layout_constraintBottom_toTopOf="@+id/BLInstitution"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/BLmealimage"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed" />
 
         <TextView
             android:id="@+id/textView68"
             android:layout_width="wrap_content"
             android:layout_height="26dp"
+            android:layout_marginTop="20dp"
             android:text="Copy Border's Unique Id"
             android:textColor="#000000"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.166"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/BLInstitution"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/BLInstitution"
             app:layout_constraintVertical_bias="0.945" />
-
-        <TextView
-            android:id="@+id/BLName"
-            android:layout_width="199dp"
-            android:layout_height="47dp"
-            android:text="     User Name"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.778"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.114" />
 
         <TextView
             android:id="@+id/BLInstitution"
             android:layout_width="206dp"
             android:layout_height="wrap_content"
-            android:text="    Institution"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:text="Institution"
+            app:layout_constraintBottom_toTopOf="@+id/textView68"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.757"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.529" />
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/BLName"
+            app:layout_constraintTop_toBottomOf="@+id/BLName" />
 
         <androidx.cardview.widget.CardView
             android:id="@+id/copyCardView"
             android:layout_width="38dp"
             android:layout_height="51dp"
+            android:layout_marginLeft="10dp"
             app:cardElevation="0dp"
             app:cardMaxElevation="0dp"
             app:layout_constraintBottom_toBottomOf="parent"

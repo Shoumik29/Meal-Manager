@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MealManager">
-        <activity android:name=".advanceMealSearch"></activity>
+        <activity android:name=".advanceMealSearch" />
         <activity android:name=".payment_confirmed" />
         <activity android:name=".mealHistoryView" />
         <activity android:name=".mealHistory" />
@@ -31,7 +31,10 @@
         <activity android:name=".payment" />
         <activity android:name=".account_settings" />
         <activity android:name=".log_in_activity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity"
+            android:windowSoftInputMode="adjustNothing"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

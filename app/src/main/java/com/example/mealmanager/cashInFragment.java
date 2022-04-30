@@ -169,7 +169,7 @@ public class cashInFragment extends Fragment {
                             obj.setDate(d.getString("Date"));
                             cashArrayList.add(obj);
                         }
-                        Collections.reverse(cashArrayList);
+                        //Collections.reverse(cashArrayList);
                         mAdapter.notifyDataSetChanged();
                     }
                 })

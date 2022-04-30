@@ -90,7 +90,7 @@ public class homeFragment extends Fragment {
         super.onStart();
 
         //append er bodole setText korte hbe
-        Tdate.append(" "+ DateFormat.getDateInstance(DateFormat.MONTH_FIELD).format(calendar.getTime()));
+        Tdate.setText("Today's Date: "+ DateFormat.getDateInstance(DateFormat.MONTH_FIELD).format(calendar.getTime()));
 
         if(currentUser != null){
             userId = currentUser.getUid();
@@ -105,16 +105,16 @@ public class homeFragment extends Fragment {
                                                 @Override
                                                 public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
                                                     if(value != null && value.exists()){
-                                                        TCashIn.append(String.valueOf(value.getDouble("total cash in")));
-                                                        TCashOut.append(String.valueOf(value.getDouble("total cash out")));
+                                                        TCashIn.setText("Total Cash In : "+String.valueOf(value.getDouble("total cash in")));
+                                                        TCashOut.setText("Total Cash Out : "+String.valueOf(value.getDouble("total cash out")));
                                                         double balance;
                                                         balance = value.getDouble("total cash in") - value.getDouble("total cash out");
                                                         if(balance<0){
-                                                            Tbalance.append(String.valueOf(balance));
+                                                            Tbalance.setText("Total Balance: "+String.valueOf(balance));
                                                             Tbalance.setTextColor(Color.RED);
                                                         }
                                                         else{
-                                                            Tbalance.append(String.valueOf(balance));
+                                                            Tbalance.setText("Total Balance: "+String.valueOf(balance));
                                                             Tbalance.setTextColor(Color.parseColor("#228B22"));
                                                         }
                                                     }

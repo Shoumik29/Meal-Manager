@@ -106,7 +106,7 @@ public class myMealFragment extends Fragment {
                             obj.setDate(d.getString("Date"));
                             mealArrayList.add(obj);
                         }
-                        Collections.reverse(mealArrayList);
+                        //Collections.reverse(mealArrayList);
                         Toast.makeText(getActivity(),String.valueOf(mealArrayList.size()), Toast.LENGTH_SHORT).show();
                         mAdapter.notifyDataSetChanged();
                     }

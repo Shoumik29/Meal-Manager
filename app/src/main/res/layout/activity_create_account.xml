@@ -4,157 +4,159 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/back2"
     tools:context=".createAccount">
 
-    <EditText
-        android:id="@+id/editName"
-        android:layout_width="219dp"
-        android:layout_height="50dp"
-        android:background="@drawable/round"
-        android:backgroundTint="#F6EAEA"
-        android:ems="10"
-        android:hint="Name"
-        android:inputType="textPersonName"
-        android:paddingStart="20dp"
-        android:paddingEnd="5dp"
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.223"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.208" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <EditText
-        android:id="@+id/ETin"
-        android:layout_width="219dp"
-        android:layout_height="50dp"
-        android:background="@drawable/round"
-        android:backgroundTint="#F6EAEA"
-        android:ems="10"
-        android:hint="Institution"
-        android:inputType="textPersonName"
-        android:paddingStart="20dp"
-        android:paddingEnd="5dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.223"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editName"
-        app:layout_constraintVertical_bias="0.055" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-    <EditText
-        android:id="@+id/editTextPhone"
-        android:layout_width="219dp"
-        android:layout_height="50dp"
-        android:background="@drawable/round"
-        android:backgroundTint="#F6EAEA"
-        android:ems="10"
-        android:hint="Mobile Number"
-        android:inputType="phone"
-        android:paddingStart="20dp"
-        android:paddingEnd="5dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.239"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ETin"
-        app:layout_constraintVertical_bias="0.062" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/back2"
+                android:paddingTop="70dp">
 
-    <EditText
-        android:id="@+id/editEmail"
-        android:layout_width="219dp"
-        android:layout_height="50dp"
-        android:background="@drawable/round"
-        android:backgroundTint="#F6EAEA"
-        android:ems="10"
-        android:hint="Email address"
-        android:inputType="textEmailAddress"
-        android:paddingStart="20dp"
-        android:paddingEnd="5dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.239"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextPhone"
-        app:layout_constraintVertical_bias="0.082" />
+                <EditText
+                    android:id="@+id/editName"
+                    android:layout_width="219dp"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="40dp"
+                    android:layout_marginTop="50dp"
+                    android:background="@drawable/round"
+                    android:backgroundTint="#F6EAEA"
+                    android:ems="10"
+                    android:hint="Name"
+                    android:inputType="textPersonName"
+                    android:paddingStart="20dp"
+                    android:paddingEnd="5dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/button3"
-        android:layout_width="186dp"
-        android:layout_height="52dp"
-        android:background="@drawable/round"
-        android:text="Create Account"
-        android:textSize="14sp"
-        app:backgroundTint="#000000"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.92" />
+                <EditText
+                    android:id="@+id/ETin"
+                    android:layout_width="219dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="140dp"
+                    android:background="@drawable/round"
+                    android:backgroundTint="#F6EAEA"
+                    android:ems="10"
+                    android:hint="Institution"
+                    android:inputType="textPersonName"
+                    android:paddingStart="20dp"
+                    android:paddingEnd="5dp"
+                    app:layout_constraintStart_toStartOf="@+id/editName"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/imageView7"
-        android:layout_width="114dp"
-        android:layout_height="100dp"
-        android:background="@drawable/create_pro_pic"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.966"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.206"
-        tools:srcCompat="@tools:sample/avatars" />
+                <EditText
+                    android:id="@+id/editTextPhone"
+                    android:layout_width="219dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="330dp"
+                    android:background="@drawable/round"
+                    android:backgroundTint="#F6EAEA"
+                    android:ems="10"
+                    android:hint="Mobile Number"
+                    android:inputType="phone"
+                    android:paddingStart="20dp"
+                    android:paddingEnd="5dp"
+                    app:layout_constraintStart_toStartOf="@+id/ETin"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/button4"
-        android:layout_width="118dp"
-        android:layout_height="36dp"
-        android:background="@drawable/round"
-        android:text="Upload"
-        android:textSize="12sp"
-        app:backgroundTint="#000000"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.965"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.355" />
+                <EditText
+                    android:id="@+id/editEmail"
+                    android:layout_width="219dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="230dp"
+                    android:background="@drawable/round"
+                    android:backgroundTint="#F6EAEA"
+                    android:ems="10"
+                    android:hint="Email address"
+                    android:inputType="textEmailAddress"
+                    android:paddingStart="20dp"
+                    android:paddingEnd="5dp"
+                    app:layout_constraintStart_toStartOf="@+id/editPass"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/editPass"
-        android:layout_width="219dp"
-        android:layout_height="50dp"
-        android:background="@drawable/round"
-        android:backgroundTint="#F6EAEA"
-        android:ems="10"
-        android:hint="Password"
-        android:inputType="textPassword"
-        android:paddingStart="20dp"
-        android:paddingEnd="5dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.239"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editEmail"
-        app:layout_constraintVertical_bias="0.097" />
+                <Button
+                    android:id="@+id/button3"
+                    android:layout_width="186dp"
+                    android:layout_height="52dp"
+                    android:layout_marginTop="620dp"
+                    android:background="@drawable/round"
+                    android:text="Create Account"
+                    android:textSize="14sp"
+                    app:backgroundTint="#000000"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.462"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/editConfirmPass"
-        android:layout_width="219dp"
-        android:layout_height="50dp"
-        android:background="@drawable/round"
-        android:backgroundTint="#F6EAEA"
-        android:ems="10"
-        android:hint="Confirm Password"
-        android:inputType="textPassword"
-        android:paddingStart="20dp"
-        android:paddingEnd="5dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.239"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editPass"
-        app:layout_constraintVertical_bias="0.12" />
+                <ImageView
+                    android:id="@+id/imageView7"
+                    android:layout_width="114dp"
+                    android:layout_height="100dp"
+                    android:layout_marginTop="80dp"
+                    android:layout_marginRight="20dp"
+                    android:background="@drawable/create_pro_pic"
+                    app:layout_constraintBottom_toTopOf="@+id/button4"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_chainStyle="packed"
+                    tools:srcCompat="@tools:sample/avatars" />
+
+                <Button
+                    android:id="@+id/button4"
+                    android:layout_width="118dp"
+                    android:layout_height="36dp"
+                    android:layout_marginRight="20dp"
+                    android:background="@drawable/round"
+                    android:text="Upload"
+                    android:textSize="12sp"
+                    app:backgroundTint="#000000"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/imageView7" />
+
+                <EditText
+                    android:id="@+id/editPass"
+                    android:layout_width="219dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="430dp"
+                    android:background="@drawable/round"
+                    android:backgroundTint="#F6EAEA"
+                    android:ems="10"
+                    android:hint="Password"
+                    android:inputType="textPassword"
+                    android:paddingStart="20dp"
+                    android:paddingEnd="5dp"
+                    app:layout_constraintStart_toStartOf="@+id/editTextPhone"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <EditText
+                    android:id="@+id/editConfirmPass"
+                    android:layout_width="219dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="520dp"
+                    android:background="@drawable/round"
+                    android:backgroundTint="#F6EAEA"
+                    android:ems="10"
+                    android:hint="Confirm Password"
+                    android:inputType="textPassword"
+                    android:paddingStart="20dp"
+                    android:paddingEnd="5dp"
+                    app:layout_constraintStart_toStartOf="@+id/editEmail"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+    </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
